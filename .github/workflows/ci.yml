@@ -40,7 +40,7 @@ jobs:
       - name: Derive affected base
         uses: nrwl/nx-set-shas@v4
 
-      - run: pnpm nx format:check
+      - run: pnpm nx format:check --base="$NX_BASE" --head="$NX_HEAD"
       - run: pnpm nx sync:check
       - run: pnpm nx affected -t lint typecheck test --parallel=3
       - run: pnpm nx affected -t build --parallel=2
