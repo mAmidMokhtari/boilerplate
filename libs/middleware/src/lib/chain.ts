@@ -39,7 +39,10 @@ export function chain(middlewares: Middleware[]) {
 
 /** Adapts a classic `(req) => NextResponse` middleware (e.g. next-intl's) into the chain. */
 export function fromLegacy(
-  handler: (req: NextRequest, event: NextFetchEvent) => NextResponse | Promise<NextResponse> | undefined | void
+  handler: (
+    req: NextRequest,
+    event: NextFetchEvent
+  ) => NextResponse | Promise<NextResponse> | undefined | void
 ): Middleware {
   return async (req, event, next) => (await handler(req, event)) ?? next();
 }

@@ -12,7 +12,13 @@ describe("DEFAULT_MATCHER", () => {
   });
 
   it("skips API routes, Next internals and files", () => {
-    for (const skipped of ["/api/auth/login", "/_next/static/chunk.js", "/favicon.ico", "/robots.txt", "/logo.svg"]) {
+    for (const skipped of [
+      "/api/auth/login",
+      "/_next/static/chunk.js",
+      "/favicon.ico",
+      "/robots.txt",
+      "/logo.svg",
+    ]) {
       expect(matches(skipped)).toBe(false);
     }
   });

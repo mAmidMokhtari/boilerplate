@@ -8,6 +8,7 @@
 ## Project
 
 <!-- Replace this block when you start a real project. -->
+
 A multi-app Next.js product: `web` (public, localized) and `admin` (staff panel).
 The backend is a separate REST API (Laravel-style envelopes: `{ data }` and
 `{ data, _paginate }`). This repo has **no database access** and never will.
@@ -18,12 +19,12 @@ The backend is a separate REST API (Laravel-style envelopes: `{ data }` and
 
 1. **Layered data flow, never skipped:**
    `Backend → apiClient → <x>.api.ts → <x>.hooks.ts → page index.hook.ts → index.tsx`
-2. **HTTP only in `libs/services/**/*.api.ts` via `apiClient`**, plus the
-   route handlers in `libs/auth/server` and `apps/*/src/app/api/**`. No `fetch`,
-   `axios`, or `apiClient` anywhere else — including `libs/ui` and app components.
-3. **React Query only in `libs/services/**/*.hooks.ts` and a page's `index.hook.ts`.**
-   Query keys come from `<x>.query-keys.ts`; cache invalidation lives in the
-   service hook; toasts / navigation / dialogs live in the app via `options`.
+2. **HTTP only in `libs/services/**/_.api.ts`via`apiClient`**, plus the
+route handlers in `libs/auth/server`and`apps/_/src/app/api/\*\*`. No `fetch`,
+`axios`, or `apiClient`anywhere else — including`libs/ui` and app components.
+3. **React Query only in `libs/services/**/\*.hooks.ts`and a page's`index.hook.ts`.**
+Query keys come from `<x>.query-keys.ts`; cache invalidation lives in the
+service hook; toasts / navigation / dialogs live in the app via `options`.
 4. **Module boundaries are enforced by ESLint** (`@nx/enforce-module-boundaries`).
    If lint fails on a dependency, the fix is to move code, not to loosen the rule.
 5. **Contracts are Zod schemas in `libs/dtos`**, types via `z.infer`. Never
@@ -87,19 +88,19 @@ each entry there is a trap this setup already works around.
 
 ## Tech stack (pinned in package.json — do not downgrade)
 
-| Area | Choice |
-|---|---|
-| Framework | Next.js 16 App Router, React 19 |
-| Language | TypeScript strict, `module: esnext` + `moduleResolution: bundler`, project references |
-| Styling | Tailwind 4 (`@theme` tokens in `libs/ui/src/styles/globals.css`), shadcn/ui on `radix-ui` |
-| Data | TanStack Query 5 |
-| State | Zustand 5 (client state only), React Query (server state) |
-| Forms | react-hook-form + `@hookform/resolvers/zod` + Zod 4 |
-| i18n | next-intl 4 (web only) |
-| Icons | lucide-react |
-| Toasts | sonner |
-| Tests | Vitest + Testing Library, Playwright |
-| Monorepo | Nx 23, pnpm |
+| Area      | Choice                                                                                    |
+| --------- | ----------------------------------------------------------------------------------------- |
+| Framework | Next.js 16 App Router, React 19                                                           |
+| Language  | TypeScript strict, `module: esnext` + `moduleResolution: bundler`, project references     |
+| Styling   | Tailwind 4 (`@theme` tokens in `libs/ui/src/styles/globals.css`), shadcn/ui on `radix-ui` |
+| Data      | TanStack Query 5                                                                          |
+| State     | Zustand 5 (client state only), React Query (server state)                                 |
+| Forms     | react-hook-form + `@hookform/resolvers/zod` + Zod 4                                       |
+| i18n      | next-intl 4 (web only)                                                                    |
+| Icons     | lucide-react                                                                              |
+| Toasts    | sonner                                                                                    |
+| Tests     | Vitest + Testing Library, Playwright                                                      |
+| Monorepo  | Nx 23, pnpm                                                                               |
 
 ---
 

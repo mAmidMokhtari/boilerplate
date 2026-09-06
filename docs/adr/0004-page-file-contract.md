@@ -10,7 +10,7 @@ page looks different. Reviews then argue structure instead of behaviour.
 ## Decision
 
 - web: `page.tsx` (server) + `components/index.tsx` (client, presentational)
-  + `components/index.hook.ts` (client, all logic, descriptive hook name).
+  - `components/index.hook.ts` (client, all logic, descriptive hook name).
 - admin: the same plus `components/texts.ts`, with the hook named `useData`.
 - Hook bodies are sectioned with block-comment dividers in a fixed order.
 - `pnpm g:page` produces the contract; reviewers reject deviations.

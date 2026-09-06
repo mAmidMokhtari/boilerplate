@@ -12,7 +12,12 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="en" className={fontVariables} style={{ ["--font-sans" as string]: "var(--font-latin)" }} suppressHydrationWarning>
+    <html
+      lang="en"
+      className={fontVariables}
+      style={{ ["--font-sans" as string]: "var(--font-latin)" }}
+      suppressHydrationWarning
+    >
       <body className="min-h-screen">
         <Providers>
           {children}

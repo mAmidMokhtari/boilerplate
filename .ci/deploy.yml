@@ -11,24 +11,48 @@
 
 deploy_staging_web:
   extends: .deploy_helm
-  variables: { RELEASE: staging-web, NAMESPACE: front-staging, VALUES_FILE: staging-web-values.yaml, IMAGE_TAG: $CI_COMMIT_SHA }
+  variables:
+    {
+      RELEASE: staging-web,
+      NAMESPACE: front-staging,
+      VALUES_FILE: staging-web-values.yaml,
+      IMAGE_TAG: $CI_COMMIT_SHA,
+    }
   needs: [build_staging_web]
   rules: [{ if: $CI_COMMIT_BRANCH == "develop" }]
 
 deploy_staging_admin:
   extends: .deploy_helm
-  variables: { RELEASE: staging-admin, NAMESPACE: front-staging, VALUES_FILE: staging-admin-values.yaml, IMAGE_TAG: $CI_COMMIT_SHA }
+  variables:
+    {
+      RELEASE: staging-admin,
+      NAMESPACE: front-staging,
+      VALUES_FILE: staging-admin-values.yaml,
+      IMAGE_TAG: $CI_COMMIT_SHA,
+    }
   needs: [build_staging_admin]
   rules: [{ if: $CI_COMMIT_BRANCH == "develop" }]
 
 deploy_production_web:
   extends: .deploy_helm
-  variables: { RELEASE: production-web, NAMESPACE: front-production, VALUES_FILE: production-web-values.yaml, IMAGE_TAG: $CI_COMMIT_TAG }
+  variables:
+    {
+      RELEASE: production-web,
+      NAMESPACE: front-production,
+      VALUES_FILE: production-web-values.yaml,
+      IMAGE_TAG: $CI_COMMIT_TAG,
+    }
   needs: [build_production_web]
   rules: [{ if: $CI_COMMIT_TAG, when: manual }]
 
 deploy_production_admin:
   extends: .deploy_helm
-  variables: { RELEASE: production-admin, NAMESPACE: front-production, VALUES_FILE: production-admin-values.yaml, IMAGE_TAG: $CI_COMMIT_TAG }
+  variables:
+    {
+      RELEASE: production-admin,
+      NAMESPACE: front-production,
+      VALUES_FILE: production-admin-values.yaml,
+      IMAGE_TAG: $CI_COMMIT_TAG,
+    }
   needs: [build_production_admin]
   rules: [{ if: $CI_COMMIT_TAG, when: manual }]

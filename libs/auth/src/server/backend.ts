@@ -16,7 +16,10 @@ export type BackendAuthClient = {
   /** Tells the backend to revoke the session. Never throws. */
   revoke: (accessToken: string | undefined) => Promise<void>;
   /** POSTs credentials to a backend auth endpoint and returns its payload or the error response. */
-  authenticate: (path: string, body: unknown) => Promise<{ ok: true; payload: IAuthPayload } | { ok: false; status: number; body: unknown }>;
+  authenticate: (
+    path: string,
+    body: unknown
+  ) => Promise<{ ok: true; payload: IAuthPayload } | { ok: false; status: number; body: unknown }>;
 };
 
 /**

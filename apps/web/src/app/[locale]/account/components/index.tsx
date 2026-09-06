@@ -17,7 +17,13 @@ export function AccountContent({ locale }: AccountContentProps) {
 
   if (vm.isLoading) return <Skeleton className="h-48 w-full max-w-lg" />;
   if (vm.isError || !vm.user) {
-    return <ErrorState title={t("error.title")} description={t("error.description")} action={{ label: t("error.retry"), onClick: vm.refetch }} />;
+    return (
+      <ErrorState
+        title={t("error.title")}
+        description={t("error.description")}
+        action={{ label: t("error.retry"), onClick: vm.refetch }}
+      />
+    );
   }
 
   return (
@@ -29,13 +35,17 @@ export function AccountContent({ locale }: AccountContentProps) {
         </Avatar>
         <div>
           <CardTitle>{vm.user.getName()}</CardTitle>
-          <p className="text-sm text-muted-foreground">{vm.user.getEmail() || vm.user.getMobile()}</p>
+          <p className="text-sm text-muted-foreground">
+            {vm.user.getEmail() || vm.user.getMobile()}
+          </p>
         </div>
       </CardHeader>
       <CardContent className="grid gap-3 text-sm">
         <div className="flex items-center justify-between">
           <span className="text-muted-foreground">{t("status")}</span>
-          <Badge variant={vm.user.isActive() ? "default" : "secondary"}>{vm.user.getStatus()}</Badge>
+          <Badge variant={vm.user.isActive() ? "default" : "secondary"}>
+            {vm.user.getStatus()}
+          </Badge>
         </div>
         <div className="flex items-center justify-between">
           <span className="text-muted-foreground">{t("memberSince")}</span>

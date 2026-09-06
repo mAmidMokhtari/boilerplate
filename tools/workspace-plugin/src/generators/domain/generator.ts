@@ -40,9 +40,19 @@ export async function domainGenerator(tree: Tree, options: DomainGeneratorSchema
     if (tree.exists(dir)) throw new Error(`${dir} already exists`);
   }
 
-  generateFiles(tree, joinPathFragments(import.meta.dirname, "files/model"), modelDir, substitutions);
+  generateFiles(
+    tree,
+    joinPathFragments(import.meta.dirname, "files/model"),
+    modelDir,
+    substitutions
+  );
   generateFiles(tree, joinPathFragments(import.meta.dirname, "files/dto"), dtoDir, substitutions);
-  generateFiles(tree, joinPathFragments(import.meta.dirname, "files/service"), serviceDir, substitutions);
+  generateFiles(
+    tree,
+    joinPathFragments(import.meta.dirname, "files/service"),
+    serviceDir,
+    substitutions
+  );
 
   appendExport(tree, "libs/models/src/index.ts", `export * from "./lib/${single.fileName}";`);
   appendExport(tree, "libs/dtos/src/index.ts", `export * from "./lib/${plural.fileName}";`);

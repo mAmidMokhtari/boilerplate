@@ -23,7 +23,11 @@ export function AppSidebar({ onNavigate, className }: AppSidebarProps) {
 
   return (
     <nav aria-label="Main" className={cn("flex h-full flex-col gap-6 p-4", className)}>
-      <Link href={ROUTES.home} className="px-2 text-lg font-semibold tracking-tight" onClick={onNavigate}>
+      <Link
+        href={ROUTES.home}
+        className="px-2 text-lg font-semibold tracking-tight"
+        onClick={onNavigate}
+      >
         Admin
       </Link>
 
@@ -33,11 +37,16 @@ export function AppSidebar({ onNavigate, className }: AppSidebarProps) {
         return (
           <div key={group.label ?? i} className="space-y-1">
             {group.label ? (
-              <p className="px-2 text-xs font-medium tracking-wide text-muted-foreground uppercase">{group.label}</p>
+              <p className="px-2 text-xs font-medium tracking-wide text-muted-foreground uppercase">
+                {group.label}
+              </p>
             ) : null}
             <ul className="space-y-0.5">
               {items.map((item) => {
-                const active = item.href === ROUTES.home ? pathname === item.href : pathname.startsWith(item.href);
+                const active =
+                  item.href === ROUTES.home
+                    ? pathname === item.href
+                    : pathname.startsWith(item.href);
                 return (
                   <li key={item.href}>
                     <Link

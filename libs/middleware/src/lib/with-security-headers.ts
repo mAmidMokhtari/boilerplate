@@ -70,8 +70,11 @@ export function withSecurityHeaders(options: SecurityHeadersOptions = {}): Middl
     }
 
     if (hsts) {
-      const { maxAge = 63_072_000, includeSubDomains = true, preload = false } =
-        typeof hsts === "object" ? hsts : {};
+      const {
+        maxAge = 63_072_000,
+        includeSubDomains = true,
+        preload = false,
+      } = typeof hsts === "object" ? hsts : {};
       headers.set(
         "Strict-Transport-Security",
         `max-age=${maxAge}${includeSubDomains ? "; includeSubDomains" : ""}${preload ? "; preload" : ""}`

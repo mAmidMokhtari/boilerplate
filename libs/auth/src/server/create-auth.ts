@@ -35,7 +35,11 @@ export type CreateAuthOptions = {
  */
 export function createAuth(options: CreateAuthOptions) {
   const cookieNames = createCookieNames(options.appId);
-  const cookies = { names: cookieNames, secure: options.secureCookies, domain: options.cookieDomain };
+  const cookies = {
+    names: cookieNames,
+    secure: options.secureCookies,
+    domain: options.cookieDomain,
+  };
   const audiencePrefix = API_PREFIX[options.audience];
 
   const paths = {

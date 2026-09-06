@@ -45,8 +45,8 @@ and trivial to test.
 
 A schema validates a form (`zodResolver`), validates a route-handler body,
 and produces the TypeScript type — three uses from one declaration. The
-`z.input<>` type exists for values *before* defaults are applied (what a
-caller passes), `z.infer<>` for values *after* (what the API receives).
+`z.input<>` type exists for values _before_ defaults are applied (what a
+caller passes), `z.infer<>` for values _after_ (what the API receives).
 
 ### Why HTTP is confined to `*.api.ts`
 
@@ -93,16 +93,16 @@ says a dependency is not allowed, the code is in the wrong layer.
 
 ## Apps vs libs — the placement test
 
-| It is… | It goes to… |
-|---|---|
-| A URL, a layout, a loading/error boundary | the app |
-| Wiring providers, auth setup, middleware composition | the app |
-| A store of client state that only one app needs | the app (`src/stores`) |
-| A backend call | `libs/services` |
-| A shape of backend data | `libs/models` |
-| A validation rule | `libs/dtos` |
-| A visual component with no data source | `libs/ui` |
-| A pure function | `libs/utils` |
-| A value that must be identical in every app | `libs/config` |
+| It is…                                               | It goes to…            |
+| ---------------------------------------------------- | ---------------------- |
+| A URL, a layout, a loading/error boundary            | the app                |
+| Wiring providers, auth setup, middleware composition | the app                |
+| A store of client state that only one app needs      | the app (`src/stores`) |
+| A backend call                                       | `libs/services`        |
+| A shape of backend data                              | `libs/models`          |
+| A validation rule                                    | `libs/dtos`            |
+| A visual component with no data source               | `libs/ui`              |
+| A pure function                                      | `libs/utils`           |
+| A value that must be identical in every app          | `libs/config`          |
 
 If it does not fit a row, it is almost never the app.

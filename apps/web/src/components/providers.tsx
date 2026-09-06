@@ -24,7 +24,9 @@ export function Providers({ children }: { children: ReactNode }) {
       <QueryClientProvider>
         <AuthEvents />
         {children}
-        {process.env.NODE_ENV === "development" ? <ReactQueryDevtools initialIsOpen={false} /> : null}
+        {process.env.NODE_ENV === "development" ? (
+          <ReactQueryDevtools initialIsOpen={false} />
+        ) : null}
       </QueryClientProvider>
     </ThemeProvider>
   );

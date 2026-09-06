@@ -11,6 +11,8 @@ describe("QueryParamBuilder", () => {
 
   it("accepts URLSearchParams and objects", () => {
     expect(QueryParamBuilder.from(new URLSearchParams({ a: "1" })).get("a")).toBe("1");
-    expect(QueryParamBuilder.from({ a: "1" }).setMany({ b: 2, c: null }).toString()).toBe("a=1&b=2");
+    expect(QueryParamBuilder.from({ a: "1" }).setMany({ b: 2, c: null }).toString()).toBe(
+      "a=1&b=2"
+    );
   });
 });

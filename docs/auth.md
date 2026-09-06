@@ -47,7 +47,12 @@ setupBrowserApiClient({ audience: "admin" });
 export default chain([
   withRequestId(),
   withSecurityHeaders({ csp: { directives: defaultCspDirectives(getPublicApiOrigin()) } }),
-  withAuthGuard({ cookieNames: createCookieNames("admin"), isProtected: (p) => !isAuthPage(p), isAuthPage, loginPath: "/login" }),
+  withAuthGuard({
+    cookieNames: createCookieNames("admin"),
+    isProtected: (p) => !isAuthPage(p),
+    isAuthPage,
+    loginPath: "/login",
+  }),
 ]);
 ```
 
@@ -109,11 +114,11 @@ backend still enforces on every request.
 
 ## Threat notes
 
-| Threat | Mitigation |
-|---|---|
-| XSS steals token | Token is httpOnly; there is nothing to steal from JS |
-| CSRF on proxy | SameSite=Lax + Origin/Host check |
-| Open proxy abuse | Proxy allow-lists the app's audience prefix only |
-| Refresh storm | Single-flight refresh per refresh token |
-| Stale shell after expiry | Edge guard decodes `exp` and redirects early |
-| Secure cookies dropped on http staging | `AUTH_COOKIE_SECURE=false` override |
+| Threat                                 | Mitigation                                           |
+| -------------------------------------- | ---------------------------------------------------- |
+| XSS steals token                       | Token is httpOnly; there is nothing to steal from JS |
+| CSRF on proxy                          | SameSite=Lax + Origin/Host check                     |
+| Open proxy abuse                       | Proxy allow-lists the app's audience prefix only     |
+| Refresh storm                          | Single-flight refresh per refresh token              |
+| Stale shell after expiry               | Edge guard decodes `exp` and redirects early         |
+| Secure cookies dropped on http staging | `AUTH_COOKIE_SECURE=false` override                  |

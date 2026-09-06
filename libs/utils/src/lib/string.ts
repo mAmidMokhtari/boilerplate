@@ -31,7 +31,10 @@ export function humanize(input: string): string {
 
 /** Strips HTML tags; use only for previews, never as a sanitizer. */
 export function stripHtml(input: string): string {
-  return input.replace(/<[^>]*>/g, "").replace(/\s+/g, " ").trim();
+  return input
+    .replace(/<[^>]*>/g, "")
+    .replace(/\s+/g, " ")
+    .trim();
 }
 
 /** Masks all but the last `visible` characters ("09121234567" → "*******4567"). */

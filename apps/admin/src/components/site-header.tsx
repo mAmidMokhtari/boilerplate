@@ -45,7 +45,12 @@ export function SiteHeader() {
         ) : (
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button variant="ghost" size="icon" className="rounded-full" aria-label="Account menu">
+              <Button
+                variant="ghost"
+                size="icon"
+                className="rounded-full"
+                aria-label="Account menu"
+              >
                 <Avatar className="size-8">
                   <AvatarImage src={me?.getAvatarUrl() ?? undefined} alt="" />
                   <AvatarFallback>{me?.getInitials() || "?"}</AvatarFallback>

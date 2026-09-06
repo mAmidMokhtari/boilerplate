@@ -14,9 +14,12 @@ export class QueryParamBuilder {
     this.params = params;
   }
 
-  static from(source?: URLSearchParams | string | Record<string, string> | null): QueryParamBuilder {
+  static from(
+    source?: URLSearchParams | string | Record<string, string> | null
+  ): QueryParamBuilder {
     if (!source) return new QueryParamBuilder(new URLSearchParams());
-    if (source instanceof URLSearchParams) return new QueryParamBuilder(new URLSearchParams(source));
+    if (source instanceof URLSearchParams)
+      return new QueryParamBuilder(new URLSearchParams(source));
     return new QueryParamBuilder(new URLSearchParams(source));
   }
 

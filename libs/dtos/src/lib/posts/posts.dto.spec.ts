@@ -7,7 +7,11 @@ describe("createPostSchema", () => {
     expect(ok.success).toBe(true);
     if (ok.success) expect(ok.data.status).toBe("draft");
 
-    expect(createPostSchema.safeParse({ title: { en: "", fa: "x" }, slug: "a" }).success).toBe(false);
-    expect(createPostSchema.safeParse({ title: { en: "A" }, slug: "Bad Slug" }).success).toBe(false);
+    expect(createPostSchema.safeParse({ title: { en: "", fa: "x" }, slug: "a" }).success).toBe(
+      false
+    );
+    expect(createPostSchema.safeParse({ title: { en: "A" }, slug: "Bad Slug" }).success).toBe(
+      false
+    );
   });
 });

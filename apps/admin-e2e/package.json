@@ -5,7 +5,12 @@
   "nx": {
     "name": "admin-e2e",
     "projectType": "application",
-    "tags": ["type:e2e", "scope:admin"],
-    "implicitDependencies": ["admin"]
+    "tags": [
+      "type:e2e",
+      "scope:admin"
+    ],
+    "implicitDependencies": [
+      "admin"
+    ]
   }
 }

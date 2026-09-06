@@ -26,7 +26,10 @@ export const fetchPostsList = cache(async (page = 1, perPage = 12): Promise<Post
   }
 });
 
-export type PostResult = { status: "ok"; raw: IPostModel } | { status: "not-found" } | { status: "unavailable" };
+export type PostResult =
+  | { status: "ok"; raw: IPostModel }
+  | { status: "not-found" }
+  | { status: "unavailable" };
 
 export const fetchPostBySlug = cache(async (slug: string): Promise<PostResult> => {
   try {

@@ -13,7 +13,10 @@ export function LocaleSwitcher() {
   const t = useTranslations("nav");
 
   return (
-    <Select value={locale} onValueChange={(next) => router.replace(pathname, { locale: next as LocaleCode })}>
+    <Select
+      value={locale}
+      onValueChange={(next) => router.replace(pathname, { locale: next as LocaleCode })}
+    >
       <SelectTrigger size="sm" className="w-28" aria-label={t("language")}>
         <SelectValue />
       </SelectTrigger>

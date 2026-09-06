@@ -17,9 +17,7 @@ export function decodeJwtPayload(token: string): JwtPayload | null {
     const base64 = segment.replace(/-/g, "+").replace(/_/g, "/");
     const padded = base64 + "=".repeat((4 - (base64.length % 4)) % 4);
     const json =
-      typeof atob === "function"
-        ? atob(padded)
-        : Buffer.from(padded, "base64").toString("utf-8");
+      typeof atob === "function" ? atob(padded) : Buffer.from(padded, "base64").toString("utf-8");
     return JSON.parse(json) as JwtPayload;
   } catch {
     return null;

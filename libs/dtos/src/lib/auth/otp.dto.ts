@@ -6,9 +6,7 @@ export const mobileSchema = z
   .trim()
   .regex(/^\+?[0-9]{8,15}$/, "Enter a valid mobile number");
 
-export const otpCodeSchema = z
-  .string()
-  .regex(/^[0-9]{4,8}$/, "Enter the numeric code");
+export const otpCodeSchema = z.string().regex(/^[0-9]{4,8}$/, "Enter the numeric code");
 
 export const requestOtpSchema = z.object({
   mobile: mobileSchema,

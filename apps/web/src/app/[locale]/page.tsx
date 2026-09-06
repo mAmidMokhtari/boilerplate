@@ -20,7 +20,9 @@ export default async function HomePage({ params }: { params: LocaleParams }) {
       <span className="rounded-full border px-3 py-1 text-xs font-medium tracking-wide text-muted-foreground uppercase">
         {t("eyebrow")}
       </span>
-      <h1 className="max-w-3xl text-4xl font-semibold tracking-tight text-balance sm:text-5xl">{t("headline")}</h1>
+      <h1 className="max-w-3xl text-4xl font-semibold tracking-tight text-balance sm:text-5xl">
+        {t("headline")}
+      </h1>
       <p className="max-w-2xl text-lg text-muted-foreground text-pretty">{t("subheadline")}</p>
       <div className="flex gap-3">
         <Button asChild size="lg">

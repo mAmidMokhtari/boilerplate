@@ -2,20 +2,20 @@
 
 ## Naming
 
-| Thing | Convention | Example |
-|---|---|---|
-| Folders & files | kebab-case | `product-card/`, `use-table-filters.ts` |
-| Components | PascalCase, named export | `export const ProductCard: React.FC<ProductCardProps>` |
-| Props type | `<Component>Props` | `ProductCardProps` |
-| Hooks | `use` + noun/verb | `usePostsList`, `useData` (admin pages) |
-| Models | `IXModel` + `XModel` | `IPostModel`, `PostModel` |
-| DTO schemas | `<verb><Entity>Schema` + `<Verb><Entity>Dto` | `createPostSchema`, `CreatePostDto` |
-| Query keys | `X_QUERY_KEY` + `xKeys` | `POSTS_QUERY_KEY`, `postsKeys.detail(id)` |
-| Enums | `XEnum` with SCREAMING members | `PostStatusEnum.PUBLISHED` |
-| Env vars | SCREAMING_SNAKE; `NEXT_PUBLIC_` only if browser-safe | `INTERNAL_API_BASE_URL` |
-| Route segments | kebab-case; dynamic `[id]`, catch-all `[...slug]`, groups `(dashboard)` | |
-| i18n keys | dot-namespaced, camelCase leaves | `posts.list.emptyTitle` |
-| Texts (admin) | `TEXTS.SCREAMING_SNAKE` | `TEXTS.TOAST_CREATED` |
+| Thing           | Convention                                                              | Example                                                |
+| --------------- | ----------------------------------------------------------------------- | ------------------------------------------------------ |
+| Folders & files | kebab-case                                                              | `product-card/`, `use-table-filters.ts`                |
+| Components      | PascalCase, named export                                                | `export const ProductCard: React.FC<ProductCardProps>` |
+| Props type      | `<Component>Props`                                                      | `ProductCardProps`                                     |
+| Hooks           | `use` + noun/verb                                                       | `usePostsList`, `useData` (admin pages)                |
+| Models          | `IXModel` + `XModel`                                                    | `IPostModel`, `PostModel`                              |
+| DTO schemas     | `<verb><Entity>Schema` + `<Verb><Entity>Dto`                            | `createPostSchema`, `CreatePostDto`                    |
+| Query keys      | `X_QUERY_KEY` + `xKeys`                                                 | `POSTS_QUERY_KEY`, `postsKeys.detail(id)`              |
+| Enums           | `XEnum` with SCREAMING members                                          | `PostStatusEnum.PUBLISHED`                             |
+| Env vars        | SCREAMING*SNAKE; `NEXT_PUBLIC*` only if browser-safe                    | `INTERNAL_API_BASE_URL`                                |
+| Route segments  | kebab-case; dynamic `[id]`, catch-all `[...slug]`, groups `(dashboard)` |                                                        |
+| i18n keys       | dot-namespaced, camelCase leaves                                        | `posts.list.emptyTitle`                                |
+| Texts (admin)   | `TEXTS.SCREAMING_SNAKE`                                                 | `TEXTS.TOAST_CREATED`                                  |
 
 ## TypeScript
 
@@ -86,14 +86,20 @@ export const postsKeys = {
 // <x>.api.ts — pure; apiClient in, Model out
 export const postsApi = {
   getList: async (params: GetPostsListInput = {}) => {
-    const raw = await apiClient.get<IPaginatedResponseModel<IPostModel>>(withQuery(endpoints.posts.admin.list, params));
+    const raw = await apiClient.get<IPaginatedResponseModel<IPostModel>>(
+      withQuery(endpoints.posts.admin.list, params)
+    );
     return new PaginatedResponseModel(PostModel, raw);
   },
 };
 
 // <x>.hooks.ts — React Query; invalidation here, UI side effects via options
 export function useCreatePost(options?: BaseMutation<PostModel, CreatePostDto>) {
-  return useMutation({ mutationFn: (d) => postsApi.create(d), invalidates: [postsKeys.lists()], options });
+  return useMutation({
+    mutationFn: (d) => postsApi.create(d),
+    invalidates: [postsKeys.lists()],
+    options,
+  });
 }
 ```
 
@@ -102,13 +108,26 @@ Invalidate `lists()` after create/delete, `all` after update (detail + lists).
 ## Model contract
 
 ```ts
-export type IPostModel = IBaseModel & { title: ILocalizedString; slug: string; status: PostStatusEnum; cover?: IMediaModel | null };
+export type IPostModel = IBaseModel & {
+  title: ILocalizedString;
+  slug: string;
+  status: PostStatusEnum;
+  cover?: IMediaModel | null;
+};
 
 export class PostModel extends BaseModel<IPostModel> {
-  getTitle(locale: string) { return pickLocalized(this.props.title, locale); }
-  getSlug() { return this.props.slug ?? ""; }
-  isPublished() { return this.getStatus() === PostStatusEnum.PUBLISHED; }
-  getCover() { return this.props.cover ? new MediaModel(this.props.cover) : null; }
+  getTitle(locale: string) {
+    return pickLocalized(this.props.title, locale);
+  }
+  getSlug() {
+    return this.props.slug ?? "";
+  }
+  isPublished() {
+    return this.getStatus() === PostStatusEnum.PUBLISHED;
+  }
+  getCover() {
+    return this.props.cover ? new MediaModel(this.props.cover) : null;
+  }
 }
 ```
 
@@ -123,7 +142,7 @@ export const createPostSchema = z.object({
   slug: slugSchema,
   status: z.enum(PostStatusEnum).default(PostStatusEnum.DRAFT),
 });
-export type CreatePostDto = z.infer<typeof createPostSchema>;   // after defaults
+export type CreatePostDto = z.infer<typeof createPostSchema>; // after defaults
 export type CreatePostInput = z.input<typeof createPostSchema>; // before defaults (form values)
 ```
 

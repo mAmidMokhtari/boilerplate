@@ -27,13 +27,18 @@ function isAuthorized(req: NextRequest, secret: string): boolean {
  */
 export async function POST(req: NextRequest) {
   const secret = getServerEnv().REVALIDATE_SECRET;
-  if (!secret) return NextResponse.json({ message: "Revalidation is not configured" }, { status: 503 });
-  if (!isAuthorized(req, secret)) return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
+  if (!secret)
+    return NextResponse.json({ message: "Revalidation is not configured" }, { status: 503 });
+  if (!isAuthorized(req, secret))
+    return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
 
   const body = (await req.json().catch(() => null)) as { tags?: unknown } | null;
   const tags = body?.tags;
   if (!Array.isArray(tags) || tags.length === 0 || tags.length > MAX_TAGS) {
-    return NextResponse.json({ message: "Body must be { tags: string[] } with 1–50 entries" }, { status: 400 });
+    return NextResponse.json(
+      { message: "Body must be { tags: string[] } with 1–50 entries" },
+      { status: 400 }
+    );
   }
 
   const unknown = tags.filter((t) => typeof t !== "string" || !isRevalidatableTag(t));

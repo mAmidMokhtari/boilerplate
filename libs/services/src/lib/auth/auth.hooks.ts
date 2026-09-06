@@ -102,9 +102,15 @@ export function useVerifyOtp(options?: BaseMutation<SessionModel, VerifyOtpDto>)
 }
 
 export function useForgotPassword(options?: BaseMutation<void, ForgotPasswordDto>) {
-  return useMutation({ mutationFn: (data: ForgotPasswordDto) => authApi.forgotPassword(data), options });
+  return useMutation({
+    mutationFn: (data: ForgotPasswordDto) => authApi.forgotPassword(data),
+    options,
+  });
 }
 
 export function useResetPassword(options?: BaseMutation<void, ResetPasswordDto>) {
-  return useMutation({ mutationFn: (data: ResetPasswordDto) => authApi.resetPassword(data), options });
+  return useMutation({
+    mutationFn: (data: ResetPasswordDto) => authApi.resetPassword(data),
+    options,
+  });
 }

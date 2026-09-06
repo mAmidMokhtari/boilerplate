@@ -8,15 +8,9 @@
     "declaration": false,
     "emitDeclarationOnly": false,
     "noEmit": true,
-    "types": [
-      "node"
-    ],
+    "types": ["node"],
     "rootDir": "src"
   },
-  "include": [
-    "src/**/*.ts"
-  ],
-  "exclude": [
-    "src/**/files/**"
-  ]
+  "include": ["src/**/*.ts"],
+  "exclude": ["src/**/files/**"]
 }

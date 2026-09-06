@@ -26,9 +26,7 @@ export class PaginatedResponseModel<TRaw, TModel> {
 
   getItems(): TModel[] {
     if (!this.items) {
-      this.items = (this.props.data ?? []).map(
-        (item) => new this.itemConstructor(item)
-      );
+      this.items = (this.props.data ?? []).map((item) => new this.itemConstructor(item));
     }
     return this.items;
   }

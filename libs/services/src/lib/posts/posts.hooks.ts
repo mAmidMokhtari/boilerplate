@@ -9,7 +9,10 @@ import { postsKeys } from "./posts.query-keys";
 
 /* ---------------------------------- public --------------------------------- */
 
-export function usePublicPostsList(params: GetPostsListInput = {}, options: BaseQuery<PostsPage> = {}) {
+export function usePublicPostsList(
+  params: GetPostsListInput = {},
+  options: BaseQuery<PostsPage> = {}
+) {
   return useQuery({
     queryKey: postsKeys.list("public", params),
     queryFn: () => publicPostsApi.getList(params),
@@ -53,7 +56,9 @@ export function useCreatePost(options?: BaseMutation<PostModel, CreatePostDto>) 
   });
 }
 
-export function useUpdatePost(options?: BaseMutation<PostModel, { id: number; data: UpdatePostDto }>) {
+export function useUpdatePost(
+  options?: BaseMutation<PostModel, { id: number; data: UpdatePostDto }>
+) {
   return useMutation({
     mutationFn: ({ id, data }: { id: number; data: UpdatePostDto }) => postsApi.update(id, data),
     invalidates: [postsKeys.all],

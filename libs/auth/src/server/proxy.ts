@@ -19,7 +19,13 @@ export type BackendProxyConfig = {
   forwardResponseHeaders?: readonly string[];
 };
 
-const DEFAULT_REQUEST_HEADERS = ["content-type", "accept", "accept-language", "x-currency", "x-request-id"];
+const DEFAULT_REQUEST_HEADERS = [
+  "content-type",
+  "accept",
+  "accept-language",
+  "x-currency",
+  "x-request-id",
+];
 const DEFAULT_RESPONSE_HEADERS = ["content-type", "content-disposition", "x-request-id"];
 
 type ProxyContext = { params: Promise<{ path: string[] }> };
@@ -68,7 +74,9 @@ export function createBackendProxy(config: BackendProxyConfig) {
 
     // Buffer once so the request can be replayed after a token refresh.
     const body =
-      req.method === "GET" || req.method === "HEAD" ? undefined : Buffer.from(await req.arrayBuffer());
+      req.method === "GET" || req.method === "HEAD"
+        ? undefined
+        : Buffer.from(await req.arrayBuffer());
 
     const { access_token, refresh_token } = readAuthCookies(req, cookies.names);
 
@@ -88,7 +96,10 @@ export function createBackendProxy(config: BackendProxyConfig) {
     if (upstream.status === 401) {
       rotated = refresh_token ? await backend.refresh(refresh_token) : null;
       if (!rotated) {
-        const res = NextResponse.json({ message: "Unauthenticated", statusCode: 401 }, { status: 401 });
+        const res = NextResponse.json(
+          { message: "Unauthenticated", statusCode: 401 },
+          { status: 401 }
+        );
         clearAuthCookies(res, cookies);
         return res;
       }

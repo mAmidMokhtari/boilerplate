@@ -29,14 +29,26 @@ export function Index() {
   const vm = useData();
 
   const columns: DataTableColumn<PostModel>[] = [
-    { id: "title", header: TEXTS.COL_TITLE, cell: (post) => <span className="font-medium">{post.getTitle("en")}</span> },
-    { id: "slug", header: TEXTS.COL_SLUG, cell: (post) => <code className="text-xs">{post.getSlug()}</code> },
+    {
+      id: "title",
+      header: TEXTS.COL_TITLE,
+      cell: (post) => <span className="font-medium">{post.getTitle("en")}</span>,
+    },
+    {
+      id: "slug",
+      header: TEXTS.COL_SLUG,
+      cell: (post) => <code className="text-xs">{post.getSlug()}</code>,
+    },
     {
       id: "status",
       header: TEXTS.COL_STATUS,
       cell: (post) => <Badge variant={STATUS_VARIANT[post.getStatus()]}>{post.getStatus()}</Badge>,
     },
-    { id: "published", header: TEXTS.COL_PUBLISHED_AT, cell: (post) => formatDate(post.getPublishedAt(), "en") || "—" },
+    {
+      id: "published",
+      header: TEXTS.COL_PUBLISHED_AT,
+      cell: (post) => formatDate(post.getPublishedAt(), "en") || "—",
+    },
     {
       id: "actions",
       header: TEXTS.COL_ACTIONS,
@@ -48,13 +60,23 @@ export function Index() {
           </Button>
           {!post.isPublished() ? (
             <Can permission="posts.publish">
-              <Button variant="ghost" size="sm" onClick={() => vm.publish(post)} disabled={vm.isPublishing}>
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={() => vm.publish(post)}
+                disabled={vm.isPublishing}
+              >
                 {TEXTS.PUBLISH}
               </Button>
             </Can>
           ) : null}
           <Can permission="posts.delete">
-            <Button variant="ghost" size="sm" className="text-destructive" onClick={() => vm.openDelete(post)}>
+            <Button
+              variant="ghost"
+              size="sm"
+              className="text-destructive"
+              onClick={() => vm.openDelete(post)}
+            >
               {TEXTS.DELETE}
             </Button>
           </Can>
@@ -76,7 +98,9 @@ export function Index() {
           />
           <Select
             value={vm.table.state.filters.status ?? ALL}
-            onValueChange={(value) => vm.table.setFilter("status", value === ALL ? undefined : (value as PostStatusEnum))}
+            onValueChange={(value) =>
+              vm.table.setFilter("status", value === ALL ? undefined : (value as PostStatusEnum))
+            }
           >
             <SelectTrigger className="w-44" aria-label={TEXTS.FILTER_STATUS}>
               <SelectValue placeholder={TEXTS.FILTER_STATUS} />
@@ -100,7 +124,10 @@ export function Index() {
       </div>
 
       {vm.isError ? (
-        <ErrorState title={TEXTS.ERROR_TITLE} action={{ label: TEXTS.RETRY, onClick: vm.refetch }} />
+        <ErrorState
+          title={TEXTS.ERROR_TITLE}
+          action={{ label: TEXTS.RETRY, onClick: vm.refetch }}
+        />
       ) : (
         <>
           <DataTable
@@ -122,7 +149,9 @@ export function Index() {
                 previous: TEXTS.PAGINATION_PREVIOUS,
                 next: TEXTS.PAGINATION_NEXT,
                 summary: ({ from, to, total }) =>
-                  TEXTS.PAGINATION_SUMMARY.replace("{from}", String(from)).replace("{to}", String(to)).replace("{total}", String(total)),
+                  TEXTS.PAGINATION_SUMMARY.replace("{from}", String(from))
+                    .replace("{to}", String(to))
+                    .replace("{total}", String(total)),
               }}
             />
           ) : null}

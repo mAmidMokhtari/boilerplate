@@ -12,7 +12,10 @@ for so you can also do it by hand.
 ## 1. Enum (optional) — `libs/enums/src/lib/brand-status.enum.ts`
 
 ```ts
-export enum BrandStatusEnum { ACTIVE = "active", INACTIVE = "inactive" }
+export enum BrandStatusEnum {
+  ACTIVE = "active",
+  INACTIVE = "inactive",
+}
 ```
 
 Export from `libs/enums/src/index.ts`.
@@ -52,7 +55,12 @@ In `index.hook.ts`:
 ```ts
 const table = useTableFilters<{ status?: BrandStatusEnum }>();
 const { data, isLoading, error } = useBrandsList(table.query);
-const createBrand = useCreateBrand({ onSuccess: () => { toast.success(TEXTS.TOAST_CREATED); drawer.onClose(); } });
+const createBrand = useCreateBrand({
+  onSuccess: () => {
+    toast.success(TEXTS.TOAST_CREATED);
+    drawer.onClose();
+  },
+});
 ```
 
 ## 7. Page — web (public)

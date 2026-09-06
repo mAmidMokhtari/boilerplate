@@ -22,7 +22,8 @@ export function useData() {
   /* --------------------------------- APIs ---------------------------------- */
   const login = useLogin({
     // Full navigation so the middleware guard re-evaluates with the new cookies.
-    onSuccess: () => window.location.assign(returnTo && returnTo.startsWith("/") ? returnTo : ROUTES.home),
+    onSuccess: () =>
+      window.location.assign(returnTo && returnTo.startsWith("/") ? returnTo : ROUTES.home),
     onError: (error) => applyServerErrors(form, error),
   });
 

@@ -18,7 +18,8 @@ export function usePostsPage({ initialRaw }: UsePostsPageOptions) {
 
   /* --------------------------------- APIs ---------------------------------- */
   const initialData = useMemo(
-    () => (initialRaw && page === 1 ? new PaginatedResponseModel(PostModel, initialRaw) : undefined),
+    () =>
+      initialRaw && page === 1 ? new PaginatedResponseModel(PostModel, initialRaw) : undefined,
     [initialRaw, page]
   );
   const { data, isLoading, isError, refetch } = usePublicPostsList(

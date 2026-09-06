@@ -22,7 +22,10 @@ export const publicPostsApi = {
   },
 
   getBySlug: async (slug: string, options?: RequestOptions): Promise<PostModel> => {
-    const raw = await apiClient.get<ApiResponse<IPostModel>>(endpoints.posts.public.bySlug(slug), options);
+    const raw = await apiClient.get<ApiResponse<IPostModel>>(
+      endpoints.posts.public.bySlug(slug),
+      options
+    );
     return new PostModel(raw.data);
   },
 };
@@ -47,7 +50,10 @@ export const postsApi = {
   },
 
   update: async (id: number, data: UpdatePostDto): Promise<PostModel> => {
-    const raw = await apiClient.patch<ApiResponse<IPostModel>>(endpoints.posts.admin.update(id), data);
+    const raw = await apiClient.patch<ApiResponse<IPostModel>>(
+      endpoints.posts.admin.update(id),
+      data
+    );
     return new PostModel(raw.data);
   },
 

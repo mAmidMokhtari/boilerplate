@@ -37,7 +37,11 @@ export function formatDate(
 }
 
 /** Date + time in one string. */
-export function formatDateTime(input: DateInput, locale: string, options: FormatDateOptions = {}): string {
+export function formatDateTime(
+  input: DateInput,
+  locale: string,
+  options: FormatDateOptions = {}
+): string {
   return formatDate(input, locale, { hour: "2-digit", minute: "2-digit", ...options });
 }
 

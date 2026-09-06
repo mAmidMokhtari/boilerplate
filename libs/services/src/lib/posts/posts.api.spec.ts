@@ -17,7 +17,10 @@ describe("postsApi", () => {
   });
 
   it("builds the list URL from params and wraps the response", async () => {
-    mocked.get.mockResolvedValueOnce({ data: [{ id: 1, title: { en: "A" }, slug: "a" }], _paginate: { total: 1, per_page: 20, current_page: 1, last_page: 1 } });
+    mocked.get.mockResolvedValueOnce({
+      data: [{ id: 1, title: { en: "A" }, slug: "a" }],
+      _paginate: { total: 1, per_page: 20, current_page: 1, last_page: 1 },
+    });
     const page = await postsApi.getList({ page: 2, search: "x" });
 
     expect(mocked.get).toHaveBeenCalledWith("/admin/v1/posts?page=2&search=x");
@@ -29,7 +32,9 @@ describe("postsApi", () => {
     mocked.get.mockResolvedValueOnce({ data: { id: 1, slug: "a" } });
     const post = await publicPostsApi.getBySlug("a", { next: { revalidate: 60, tags: ["posts"] } });
 
-    expect(mocked.get).toHaveBeenCalledWith("/general/v1/posts/a", { next: { revalidate: 60, tags: ["posts"] } });
+    expect(mocked.get).toHaveBeenCalledWith("/general/v1/posts/a", {
+      next: { revalidate: 60, tags: ["posts"] },
+    });
     expect(post.getSlug()).toBe("a");
   });
 });

@@ -27,7 +27,8 @@ type RouteHandler = (req: NextRequest) => Promise<NextResponse>;
 export function createAuthHandlers(config: AuthHandlersConfig) {
   const { backend, cookies, paths } = config;
 
-  const forbidden = () => NextResponse.json({ message: "Forbidden", statusCode: 403 }, { status: 403 });
+  const forbidden = () =>
+    NextResponse.json({ message: "Forbidden", statusCode: 403 }, { status: 403 });
 
   const credentialHandler =
     (backendPath: string): RouteHandler =>
@@ -35,11 +36,17 @@ export function createAuthHandlers(config: AuthHandlersConfig) {
       if (!isSameOriginRequest(req)) return forbidden();
       const body = await readJsonBody(req);
       if (!body) {
-        return NextResponse.json({ message: "Invalid request body", statusCode: 400 }, { status: 400 });
+        return NextResponse.json(
+          { message: "Invalid request body", statusCode: 400 },
+          { status: 400 }
+        );
       }
 
       const result = await backend.authenticate(backendPath, body);
-      if (!result.ok) return NextResponse.json(result.body ?? { message: "Authentication failed" }, { status: result.status });
+      if (!result.ok)
+        return NextResponse.json(result.body ?? { message: "Authentication failed" }, {
+          status: result.status,
+        });
 
       const { user, ...tokens } = result.payload;
       const res = NextResponse.json({ data: { user } });
@@ -51,7 +58,8 @@ export function createAuthHandlers(config: AuthHandlersConfig) {
 
   const register: RouteHandler = paths.register
     ? credentialHandler(paths.register)
-    : async () => NextResponse.json({ message: "Registration disabled", statusCode: 404 }, { status: 404 });
+    : async () =>
+        NextResponse.json({ message: "Registration disabled", statusCode: 404 }, { status: 404 });
 
   const logout: RouteHandler = async (req) => {
     if (!isSameOriginRequest(req)) return forbidden();

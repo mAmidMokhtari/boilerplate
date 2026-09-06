@@ -1,13 +1,13 @@
 # Testing
 
-| Layer | Tool | Environment | What to test |
-|---|---|---|---|
-| `libs/utils`, `libs/models`, `libs/dtos`, `libs/config` | Vitest | node / jsdom | Pure functions, getters on partial payloads, schema accept/reject |
-| `libs/services` | Vitest | jsdom | `*.api.ts` with `apiClient` mocked: URL built, model returned. `api-client` with `fetch` mocked |
-| `libs/auth`, `libs/middleware` | Vitest | node | Route handlers and middleware with real `NextRequest` objects |
-| `libs/ui` | Vitest + Testing Library | jsdom | Rendering, roles, keyboard paths. Stories double as visual docs |
-| `apps/*` | Vitest | jsdom | Page hooks (`useData`) with service hooks mocked; small helpers |
-| `apps/*-e2e` | Playwright | Chromium | Routing, guards, forms, i18n direction |
+| Layer                                                   | Tool                     | Environment  | What to test                                                                                    |
+| ------------------------------------------------------- | ------------------------ | ------------ | ----------------------------------------------------------------------------------------------- |
+| `libs/utils`, `libs/models`, `libs/dtos`, `libs/config` | Vitest                   | node / jsdom | Pure functions, getters on partial payloads, schema accept/reject                               |
+| `libs/services`                                         | Vitest                   | jsdom        | `*.api.ts` with `apiClient` mocked: URL built, model returned. `api-client` with `fetch` mocked |
+| `libs/auth`, `libs/middleware`                          | Vitest                   | node         | Route handlers and middleware with real `NextRequest` objects                                   |
+| `libs/ui`                                               | Vitest + Testing Library | jsdom        | Rendering, roles, keyboard paths. Stories double as visual docs                                 |
+| `apps/*`                                                | Vitest                   | jsdom        | Page hooks (`useData`) with service hooks mocked; small helpers                                 |
+| `apps/*-e2e`                                            | Playwright               | Chromium     | Routing, guards, forms, i18n direction                                                          |
 
 ## Commands
 

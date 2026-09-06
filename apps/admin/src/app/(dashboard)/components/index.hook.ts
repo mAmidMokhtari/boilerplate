@@ -15,9 +15,21 @@ export function useData() {
   return {
     userName: me.data?.getName(),
     stats: [
-      { label: TEXTS.STAT_POSTS, value: posts.data?.getPaginate().getTotal() ?? null, isLoading: posts.isLoading },
-      { label: TEXTS.STAT_PUBLISHED, value: published.data?.getPaginate().getTotal() ?? null, isLoading: published.isLoading },
-      { label: TEXTS.STAT_USERS, value: users.data?.getPaginate().getTotal() ?? null, isLoading: users.isLoading },
+      {
+        label: TEXTS.STAT_POSTS,
+        value: posts.data?.getPaginate().getTotal() ?? null,
+        isLoading: posts.isLoading,
+      },
+      {
+        label: TEXTS.STAT_PUBLISHED,
+        value: published.data?.getPaginate().getTotal() ?? null,
+        isLoading: published.isLoading,
+      },
+      {
+        label: TEXTS.STAT_USERS,
+        value: users.data?.getPaginate().getTotal() ?? null,
+        isLoading: users.isLoading,
+      },
     ],
   };
 }

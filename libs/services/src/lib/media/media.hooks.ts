@@ -7,7 +7,10 @@ import type { BaseMutation, BaseQuery } from "../shared/types";
 import { mediaApi, type MediaPage } from "./media.api";
 import { mediaKeys } from "./media.query-keys";
 
-export function useMediaList(params: Partial<GetMediaListDto> = {}, options: BaseQuery<MediaPage> = {}) {
+export function useMediaList(
+  params: Partial<GetMediaListDto> = {},
+  options: BaseQuery<MediaPage> = {}
+) {
   return useQuery({
     queryKey: mediaKeys.list(params),
     queryFn: () => mediaApi.getList(params),

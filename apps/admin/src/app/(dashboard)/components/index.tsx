@@ -11,12 +11,16 @@ export function Index() {
 
   return (
     <div className="space-y-6">
-      {vm.userName ? <p className="text-muted-foreground">{TEXTS.WELCOME.replace("{name}", vm.userName)}</p> : null}
+      {vm.userName ? (
+        <p className="text-muted-foreground">{TEXTS.WELCOME.replace("{name}", vm.userName)}</p>
+      ) : null}
       <div className="grid gap-4 sm:grid-cols-3">
         {vm.stats.map((stat) => (
           <Card key={stat.label}>
             <CardHeader className="pb-2">
-              <CardTitle className="text-sm font-medium text-muted-foreground">{stat.label}</CardTitle>
+              <CardTitle className="text-sm font-medium text-muted-foreground">
+                {stat.label}
+              </CardTitle>
             </CardHeader>
             <CardContent>
               {stat.isLoading ? (

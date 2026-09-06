@@ -32,7 +32,9 @@ export function useCreateUser(options?: BaseMutation<UserModel, CreateUserDto>) 
   });
 }
 
-export function useUpdateUser(options?: BaseMutation<UserModel, { id: number; data: UpdateUserDto }>) {
+export function useUpdateUser(
+  options?: BaseMutation<UserModel, { id: number; data: UpdateUserDto }>
+) {
   return useMutation({
     mutationFn: ({ id, data }: { id: number; data: UpdateUserDto }) => usersApi.update(id, data),
     invalidates: [usersKeys.all],
@@ -48,7 +50,9 @@ export function useDeleteUser(options?: BaseMutation<void, number>) {
   });
 }
 
-export function useSyncUserRoles(options?: BaseMutation<UserModel, { id: number; roles: string[] }>) {
+export function useSyncUserRoles(
+  options?: BaseMutation<UserModel, { id: number; roles: string[] }>
+) {
   return useMutation({
     mutationFn: ({ id, roles }: { id: number; roles: string[] }) => usersApi.syncRoles(id, roles),
     invalidates: [usersKeys.all],

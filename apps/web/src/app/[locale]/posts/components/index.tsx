@@ -29,7 +29,11 @@ export function PostsContent({ locale, initialRaw, unavailable }: PostsContentPr
       </header>
 
       {vm.isError || (unavailable && !vm.data) ? (
-        <ErrorState title={t("unavailable.title")} description={t("unavailable.description")} action={{ label: t("unavailable.retry"), onClick: vm.refetch }} />
+        <ErrorState
+          title={t("unavailable.title")}
+          description={t("unavailable.description")}
+          action={{ label: t("unavailable.retry"), onClick: vm.refetch }}
+        />
       ) : vm.isLoading ? (
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {Array.from({ length: 6 }).map((_, i) => (
@@ -51,7 +55,9 @@ export function PostsContent({ locale, initialRaw, unavailable }: PostsContentPr
                     </CardHeader>
                     {post.getExcerpt(locale) ? (
                       <CardContent>
-                        <p className="line-clamp-3 text-sm text-muted-foreground">{post.getExcerpt(locale)}</p>
+                        <p className="line-clamp-3 text-sm text-muted-foreground">
+                          {post.getExcerpt(locale)}
+                        </p>
                       </CardContent>
                     ) : null}
                   </Card>

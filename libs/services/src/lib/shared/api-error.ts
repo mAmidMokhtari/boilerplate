@@ -21,7 +21,11 @@ export class ApiClientError extends Error {
   constructor(
     message: string,
     statusCode: number,
-    options: { errors?: Record<string, string | string[]>; code?: number | string; requestId?: string } = {}
+    options: {
+      errors?: Record<string, string | string[]>;
+      code?: number | string;
+      requestId?: string;
+    } = {}
   ) {
     super(message);
     this.name = "ApiClientError";

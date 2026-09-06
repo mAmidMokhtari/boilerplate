@@ -37,7 +37,12 @@ export function Header() {
               <Button asChild variant="ghost" size="sm">
                 <Link href="/account">{user.getName() || t("account")}</Link>
               </Button>
-              <Button variant="outline" size="sm" onClick={() => logout.mutate()} disabled={logout.isPending}>
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => logout.mutate()}
+                disabled={logout.isPending}
+              >
                 {t("logout")}
               </Button>
             </>

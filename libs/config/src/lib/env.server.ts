@@ -25,7 +25,9 @@ const serverEnvSchema = z.object({
       .transform((v) => (v == null ? undefined : v === "true"))
   ),
   /** Shared secret for `POST /api/revalidate`. Endpoint is disabled when unset. */
-  REVALIDATE_SECRET: optionalEnv(z.string().min(16, "REVALIDATE_SECRET must be at least 16 characters").optional()),
+  REVALIDATE_SECRET: optionalEnv(
+    z.string().min(16, "REVALIDATE_SECRET must be at least 16 characters").optional()
+  ),
   /** "false" on staging/preview keeps the deployment out of search engines. */
   SITE_ROBOTS_INDEX: optionalEnv(
     z

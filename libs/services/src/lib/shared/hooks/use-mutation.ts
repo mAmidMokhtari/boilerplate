@@ -32,9 +32,7 @@ export function useMutation<TData, TVariables = void>({
   return useTanStackMutation<TData, ApiClientError, TVariables>({
     mutationFn,
     onSuccess: async (data, variables) => {
-      await Promise.all(
-        invalidates.map((queryKey) => queryClient.invalidateQueries({ queryKey }))
-      );
+      await Promise.all(invalidates.map((queryKey) => queryClient.invalidateQueries({ queryKey })));
       options?.onSuccess?.(data, variables);
     },
     onError: (error, variables) => options?.onError?.(error, variables),

@@ -42,8 +42,18 @@ export function Index() {
         </div>
       ),
     },
-    { id: "status", header: TEXTS.COL_STATUS, cell: (user) => <Badge variant={user.isActive() ? "default" : "outline"}>{user.getStatus()}</Badge> },
-    { id: "created", header: TEXTS.COL_CREATED, cell: (user) => formatDate(user.getCreatedAt(), "en") },
+    {
+      id: "status",
+      header: TEXTS.COL_STATUS,
+      cell: (user) => (
+        <Badge variant={user.isActive() ? "default" : "outline"}>{user.getStatus()}</Badge>
+      ),
+    },
+    {
+      id: "created",
+      header: TEXTS.COL_CREATED,
+      cell: (user) => formatDate(user.getCreatedAt(), "en"),
+    },
   ];
 
   return (
@@ -57,10 +67,20 @@ export function Index() {
       />
 
       {vm.isError ? (
-        <ErrorState title={TEXTS.ERROR_TITLE} action={{ label: TEXTS.RETRY, onClick: vm.refetch }} />
+        <ErrorState
+          title={TEXTS.ERROR_TITLE}
+          action={{ label: TEXTS.RETRY, onClick: vm.refetch }}
+        />
       ) : (
         <>
-          <DataTable columns={columns} rows={vm.users} rowKey={(u) => u.getId()} isLoading={vm.isLoading} emptyTitle={TEXTS.EMPTY_TITLE} emptyDescription={TEXTS.EMPTY_DESCRIPTION} />
+          <DataTable
+            columns={columns}
+            rows={vm.users}
+            rowKey={(u) => u.getId()}
+            isLoading={vm.isLoading}
+            emptyTitle={TEXTS.EMPTY_TITLE}
+            emptyDescription={TEXTS.EMPTY_DESCRIPTION}
+          />
           {vm.paginate ? (
             <PaginationBar
               page={vm.paginate.getCurrentPage()}

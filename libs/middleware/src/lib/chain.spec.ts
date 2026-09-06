@@ -34,7 +34,10 @@ describe("middleware chain", () => {
   });
 
   it("adds request id and security headers", async () => {
-    const res = await chain([withRequestId(), withSecurityHeaders({ hsts: false })])(req("/"), event);
+    const res = await chain([withRequestId(), withSecurityHeaders({ hsts: false })])(
+      req("/"),
+      event
+    );
     expect(res.headers.get("x-request-id")).toBeTruthy();
     expect(res.headers.get("x-content-type-options")).toBe("nosniff");
     expect(res.headers.get("x-frame-options")).toBe("SAMEORIGIN");
@@ -42,7 +45,9 @@ describe("middleware chain", () => {
   });
 
   it("redirects retired paths with capture groups", async () => {
-    const res = await chain([withRedirects([{ from: /^\/de(\/.*)?$/, to: "/nl$1", permanent: true }])])(req("/de/about"), event);
+    const res = await chain([
+      withRedirects([{ from: /^\/de(\/.*)?$/, to: "/nl$1", permanent: true }]),
+    ])(req("/de/about"), event);
     expect(res.status).toBe(308);
     expect(res.headers.get("location")).toBe("https://app.test/nl/about");
   });
@@ -58,7 +63,9 @@ describe("middleware chain", () => {
     });
 
     const anonymous = await chain([guard])(req("/fa/account/orders"), event);
-    expect(anonymous.headers.get("location")).toBe("https://app.test/fa/login?next=%2Ffa%2Faccount%2Forders");
+    expect(anonymous.headers.get("location")).toBe(
+      "https://app.test/fa/login?next=%2Ffa%2Faccount%2Forders"
+    );
 
     const signedIn = await chain([guard])(req("/en/login", { r: "refresh" }), event);
     expect(signedIn.headers.get("location")).toBe("https://app.test/en");

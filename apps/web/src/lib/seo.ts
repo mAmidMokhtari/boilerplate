@@ -14,7 +14,10 @@ export function absoluteUrl(path: string): string {
 }
 
 /** Canonical + hreflang alternates for a localized path (without locale prefix). */
-export function localizedAlternates(locale: string, path: string): NonNullable<Metadata["alternates"]> {
+export function localizedAlternates(
+  locale: string,
+  path: string
+): NonNullable<Metadata["alternates"]> {
   const clean = path.startsWith("/") ? path : `/${path}`;
   return {
     canonical: absoluteUrl(`/${locale}${clean}`),

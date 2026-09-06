@@ -55,24 +55,24 @@ pnpm check                      # lint + typecheck + unit tests for affected pro
 
 ## What you get
 
-| Concern | Decision | Where |
-|---|---|---|
-| Monorepo | Nx 23 + pnpm workspaces, TypeScript project references | `nx.json`, `pnpm-workspace.yaml` |
-| Framework | Next.js 16 App Router, React 19, RSC-first pages | `apps/*` |
-| Styling | Tailwind 4, shadcn/ui on the unified `radix-ui` package, `next-themes` | `libs/ui` |
-| Data | TanStack Query 5 behind typed domain hooks; one `apiClient` | `libs/services` |
-| Contracts | Zod 4 schemas with `z.infer` — never hand-written parallel types | `libs/dtos` |
-| Domain shapes | `IXModel` raw interface + `XModel` class with null-safe getters | `libs/models` |
-| Auth | Backend JWT pair in **httpOnly cookies**, same-origin BFF proxy with single-flight refresh | `libs/auth` |
-| Middleware | Composable chain: request-id, security headers, auth guard, redirects, next-intl | `libs/middleware` |
-| Env | Zod-validated, split into public/server accessors; no scattered `process.env` | `libs/config` |
-| i18n | next-intl, `en` + `fa`, RTL via logical CSS properties | `apps/web/src/i18n`, `libs/config` |
-| State | Zustand for cross-page client state; React Query for server state | `apps/*/src/stores` |
-| Boundaries | `@nx/enforce-module-boundaries` with `type:*` tags — **enforced**, not advisory | `eslint.config.mjs` |
-| Generators | `pnpm g:page`, `pnpm g:domain` scaffold a page / a full vertical slice | `tools/workspace-plugin` |
-| Testing | Vitest + Testing Library for libs and components, Playwright per app | `libs/testing`, `apps/*-e2e` |
-| Storybook | Component workshop for `libs/ui` | `libs/ui/.storybook` |
-| Delivery | Multi-stage Dockerfile (standalone output), GitHub Actions + GitLab CI | `Dockerfile`, `.github`, `.gitlab-ci.yml` |
+| Concern       | Decision                                                                                   | Where                                     |
+| ------------- | ------------------------------------------------------------------------------------------ | ----------------------------------------- |
+| Monorepo      | Nx 23 + pnpm workspaces, TypeScript project references                                     | `nx.json`, `pnpm-workspace.yaml`          |
+| Framework     | Next.js 16 App Router, React 19, RSC-first pages                                           | `apps/*`                                  |
+| Styling       | Tailwind 4, shadcn/ui on the unified `radix-ui` package, `next-themes`                     | `libs/ui`                                 |
+| Data          | TanStack Query 5 behind typed domain hooks; one `apiClient`                                | `libs/services`                           |
+| Contracts     | Zod 4 schemas with `z.infer` — never hand-written parallel types                           | `libs/dtos`                               |
+| Domain shapes | `IXModel` raw interface + `XModel` class with null-safe getters                            | `libs/models`                             |
+| Auth          | Backend JWT pair in **httpOnly cookies**, same-origin BFF proxy with single-flight refresh | `libs/auth`                               |
+| Middleware    | Composable chain: request-id, security headers, auth guard, redirects, next-intl           | `libs/middleware`                         |
+| Env           | Zod-validated, split into public/server accessors; no scattered `process.env`              | `libs/config`                             |
+| i18n          | next-intl, `en` + `fa`, RTL via logical CSS properties                                     | `apps/web/src/i18n`, `libs/config`        |
+| State         | Zustand for cross-page client state; React Query for server state                          | `apps/*/src/stores`                       |
+| Boundaries    | `@nx/enforce-module-boundaries` with `type:*` tags — **enforced**, not advisory            | `eslint.config.mjs`                       |
+| Generators    | `pnpm g:page`, `pnpm g:domain` scaffold a page / a full vertical slice                     | `tools/workspace-plugin`                  |
+| Testing       | Vitest + Testing Library for libs and components, Playwright per app                       | `libs/testing`, `apps/*-e2e`              |
+| Storybook     | Component workshop for `libs/ui`                                                           | `libs/ui/.storybook`                      |
+| Delivery      | Multi-stage Dockerfile (standalone output), GitHub Actions + GitLab CI                     | `Dockerfile`, `.github`, `.gitlab-ci.yml` |
 
 ---
 
@@ -234,16 +234,16 @@ Components land in `libs/ui/src/components/`; export them from the package
   inline elsewhere — validation happens once, with a readable error.
 - Missing or malformed values fail at startup, not on the first request.
 
-| Variable | Scope | Purpose |
-|---|---|---|
-| `NEXT_PUBLIC_API_BASE_URL` | browser | Backend origin for public endpoints and CSP `connect-src` |
-| `INTERNAL_API_BASE_URL` | server | Backend origin as seen from the server / proxy |
-| `NEXT_PUBLIC_APP_URL` | browser | Canonical site origin for metadata and sitemaps |
-| `NEXT_PUBLIC_DEFAULT_LOCALE` | browser | Fallback locale (`en`) |
-| `NEXT_PUBLIC_DEFAULT_CURRENCY` | browser | Base currency the catalog is priced in |
-| `AUTH_COOKIE_SECURE` | server | Force `Secure` cookies on/off (staging over http) |
-| `REVALIDATE_SECRET` | server | Guards `POST /api/revalidate` |
-| `SITE_ROBOTS_INDEX` | server | `false` keeps staging out of search engines |
+| Variable                       | Scope   | Purpose                                                   |
+| ------------------------------ | ------- | --------------------------------------------------------- |
+| `NEXT_PUBLIC_API_BASE_URL`     | browser | Backend origin for public endpoints and CSP `connect-src` |
+| `INTERNAL_API_BASE_URL`        | server  | Backend origin as seen from the server / proxy            |
+| `NEXT_PUBLIC_APP_URL`          | browser | Canonical site origin for metadata and sitemaps           |
+| `NEXT_PUBLIC_DEFAULT_LOCALE`   | browser | Fallback locale (`en`)                                    |
+| `NEXT_PUBLIC_DEFAULT_CURRENCY` | browser | Base currency the catalog is priced in                    |
+| `AUTH_COOKIE_SECURE`           | server  | Force `Secure` cookies on/off (staging over http)         |
+| `REVALIDATE_SECRET`            | server  | Guards `POST /api/revalidate`                             |
+| `SITE_ROBOTS_INDEX`            | server  | `false` keeps staging out of search engines               |
 
 ---
 
@@ -266,7 +266,12 @@ Everything is created by one call per app:
 
 ```ts
 // apps/admin/src/lib/auth.server.ts
-export const auth = createAuth({ appId: "admin", audience: "admin", backendBaseUrl, secureCookies });
+export const auth = createAuth({
+  appId: "admin",
+  audience: "admin",
+  backendBaseUrl,
+  secureCookies,
+});
 ```
 
 Details, sequence diagrams and threat notes: [docs/auth.md](./docs/auth.md).
@@ -289,11 +294,11 @@ Details, sequence diagrams and threat notes: [docs/auth.md](./docs/auth.md).
 
 ## Testing
 
-| Layer | Tool | Command |
-|---|---|---|
-| utils, models, dtos, services | Vitest (node) | `pnpm nx test utils` |
-| ui, app components | Vitest + jsdom + Testing Library | `pnpm nx test ui` |
-| apps end-to-end | Playwright | `pnpm nx e2e web-e2e` |
+| Layer                         | Tool                             | Command               |
+| ----------------------------- | -------------------------------- | --------------------- |
+| utils, models, dtos, services | Vitest (node)                    | `pnpm nx test utils`  |
+| ui, app components            | Vitest + jsdom + Testing Library | `pnpm nx test ui`     |
+| apps end-to-end               | Playwright                       | `pnpm nx e2e web-e2e` |
 
 `@repo/testing` exports `renderWithProviders` (QueryClient + theme + intl) and
 `createTestQueryClient`. Tests sit next to the code as `*.spec.ts(x)`.

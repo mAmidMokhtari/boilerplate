@@ -16,7 +16,10 @@ export function fakeResponse<T>(data: T) {
 }
 
 /** Minimal `Response`-like object for mocking `fetch`. */
-export function fakeFetchResponse(body: unknown, init: { status?: number; headers?: Record<string, string> } = {}): Response {
+export function fakeFetchResponse(
+  body: unknown,
+  init: { status?: number; headers?: Record<string, string> } = {}
+): Response {
   const status = init.status ?? 200;
   return new Response(body === undefined ? null : JSON.stringify(body), {
     status,

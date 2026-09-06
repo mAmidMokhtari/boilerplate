@@ -31,10 +31,17 @@ export function useTableFilters<TFilters extends Record<string, unknown> = Recor
   const debouncedSearch = useDebouncedValue(state.search, 350);
 
   const setPage = useCallback((page: number) => setState((s) => ({ ...s, page })), []);
-  const setPerPage = useCallback((perPage: number) => setState((s) => ({ ...s, perPage, page: 1 })), []);
-  const setSearch = useCallback((search: string) => setState((s) => ({ ...s, search, page: 1 })), []);
+  const setPerPage = useCallback(
+    (perPage: number) => setState((s) => ({ ...s, perPage, page: 1 })),
+    []
+  );
+  const setSearch = useCallback(
+    (search: string) => setState((s) => ({ ...s, search, page: 1 })),
+    []
+  );
   const setSort = useCallback(
-    (sortBy?: string, sortOrder?: SortOrderEnum) => setState((s) => ({ ...s, sortBy, sortOrder, page: 1 })),
+    (sortBy?: string, sortOrder?: SortOrderEnum) =>
+      setState((s) => ({ ...s, sortBy, sortOrder, page: 1 })),
     []
   );
 
@@ -42,8 +49,10 @@ export function useTableFilters<TFilters extends Record<string, unknown> = Recor
   const toggleSort = useCallback(
     (column: string) =>
       setState((s) => {
-        if (s.sortBy !== column) return { ...s, sortBy: column, sortOrder: SortOrderEnum.ASC, page: 1 };
-        if (s.sortOrder === SortOrderEnum.ASC) return { ...s, sortOrder: SortOrderEnum.DESC, page: 1 };
+        if (s.sortBy !== column)
+          return { ...s, sortBy: column, sortOrder: SortOrderEnum.ASC, page: 1 };
+        if (s.sortOrder === SortOrderEnum.ASC)
+          return { ...s, sortOrder: SortOrderEnum.DESC, page: 1 };
         return { ...s, sortBy: undefined, sortOrder: undefined, page: 1 };
       }),
     []
@@ -54,7 +63,15 @@ export function useTableFilters<TFilters extends Record<string, unknown> = Recor
     []
   );
   const reset = useCallback(
-    () => setState((s) => ({ ...s, page: 1, search: "", sortBy: undefined, sortOrder: undefined, filters: {} as TFilters })),
+    () =>
+      setState((s) => ({
+        ...s,
+        page: 1,
+        search: "",
+        sortBy: undefined,
+        sortOrder: undefined,
+        filters: {} as TFilters,
+      })),
     []
   );
 
@@ -70,5 +87,15 @@ export function useTableFilters<TFilters extends Record<string, unknown> = Recor
     [state.page, state.perPage, debouncedSearch, state.sortBy, state.sortOrder, state.filters]
   );
 
-  return { state, query, setPage, setPerPage, setSearch, setSort, toggleSort, setFilter, reset } as const;
+  return {
+    state,
+    query,
+    setPage,
+    setPerPage,
+    setSearch,
+    setSort,
+    toggleSort,
+    setFilter,
+    reset,
+  } as const;
 }

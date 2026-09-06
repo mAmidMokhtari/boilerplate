@@ -19,7 +19,10 @@ export type AuthGuardOptions = {
   returnToParam?: string | false;
 };
 
-function splitLocale(pathname: string, locales: readonly string[] = []): { locale: string | null; path: string } {
+function splitLocale(
+  pathname: string,
+  locales: readonly string[] = []
+): { locale: string | null; path: string } {
   const [, first = "", ...rest] = pathname.split("/");
   if (locales.includes(first)) {
     return { locale: first, path: `/${rest.join("/")}`.replace(/\/$/, "") || "/" };
@@ -55,7 +58,8 @@ export function withAuthGuard(options: AuthGuardOptions): Middleware {
       const url = req.nextUrl.clone();
       url.pathname = target;
       url.search = "";
-      if (returnToParam) url.searchParams.set(returnToParam, req.nextUrl.pathname + req.nextUrl.search);
+      if (returnToParam)
+        url.searchParams.set(returnToParam, req.nextUrl.pathname + req.nextUrl.search);
       return NextResponse.redirect(url);
     }
 

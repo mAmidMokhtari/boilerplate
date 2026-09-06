@@ -27,7 +27,13 @@ export async function generateMetadata({ params }: { params: LocaleParams }): Pr
   };
 }
 
-export default async function LocaleLayout({ children, params }: { children: ReactNode; params: LocaleParams }) {
+export default async function LocaleLayout({
+  children,
+  params,
+}: {
+  children: ReactNode;
+  params: LocaleParams;
+}) {
   const { locale } = await resolveLocaleParams(params);
   const messages = await getMessages();
   const rtl = isRtlLocale(locale);
@@ -46,7 +52,12 @@ export default async function LocaleLayout({ children, params }: { children: Rea
             <Header />
             <div className="flex-1">{children}</div>
             <Footer />
-            <Toaster position={rtl ? "top-left" : "top-right"} richColors closeButton dir={rtl ? "rtl" : "ltr"} />
+            <Toaster
+              position={rtl ? "top-left" : "top-right"}
+              richColors
+              closeButton
+              dir={rtl ? "rtl" : "ltr"}
+            />
           </Providers>
         </NextIntlClientProvider>
       </body>

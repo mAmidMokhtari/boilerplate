@@ -63,8 +63,6 @@ export function isExternalUrl(url: string): boolean {
 export function joinUrl(...parts: string[]): string {
   return parts
     .filter(Boolean)
-    .map((part, index) =>
-      index === 0 ? part.replace(/\/+$/, "") : part.replace(/^\/+|\/+$/g, "")
-    )
+    .map((part, index) => (index === 0 ? part.replace(/\/+$/, "") : part.replace(/^\/+|\/+$/g, "")))
     .join("/");
 }

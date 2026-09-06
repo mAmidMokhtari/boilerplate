@@ -17,7 +17,9 @@ export function startsWithAny(prefixes: readonly string[]): (pathname: string) =
  * its own `proxy.ts`. This export exists so the canonical value has one home
  * and can be asserted in tests.
  */
-export const DEFAULT_MATCHER = ["/((?!api|_next/static|_next/image|favicon.ico|robots.txt|sitemap.*\\.xml|.*\\..*).*)"];
+export const DEFAULT_MATCHER = [
+  "/((?!api|_next/static|_next/image|favicon.ico|robots.txt|sitemap.*\\.xml|.*\\..*).*)",
+];
 
 /** Decodes the `exp` claim of a JWT without verifying it (Edge-safe). */
 export function decodeJwtExp(token: string): number | null {
@@ -25,7 +27,9 @@ export function decodeJwtExp(token: string): number | null {
     const segment = token.split(".")[1];
     if (!segment) return null;
     const base64 = segment.replace(/-/g, "+").replace(/_/g, "/");
-    const json = JSON.parse(atob(base64 + "=".repeat((4 - (base64.length % 4)) % 4))) as { exp?: unknown };
+    const json = JSON.parse(atob(base64 + "=".repeat((4 - (base64.length % 4)) % 4))) as {
+      exp?: unknown;
+    };
     return typeof json.exp === "number" ? json.exp : null;
   } catch {
     return null;

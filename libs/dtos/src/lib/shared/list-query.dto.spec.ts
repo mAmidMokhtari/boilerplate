@@ -4,7 +4,11 @@ import { listQuerySchema } from "./list-query.dto";
 describe("listQuerySchema", () => {
   it("applies defaults and coerces strings from the URL", () => {
     expect(listQuerySchema.parse({})).toEqual({ page: 1, per_page: 20 });
-    expect(listQuerySchema.parse({ page: "3", per_page: "50", search: " x " })).toMatchObject({ page: 3, per_page: 50, search: "x" });
+    expect(listQuerySchema.parse({ page: "3", per_page: "50", search: " x " })).toMatchObject({
+      page: 3,
+      per_page: 50,
+      search: "x",
+    });
   });
 
   it("rejects out-of-range values", () => {

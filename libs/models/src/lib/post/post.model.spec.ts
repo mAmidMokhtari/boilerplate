@@ -11,7 +11,13 @@ describe("PostModel", () => {
   });
 
   it("exposes safe getters", () => {
-    const post = new PostModel({ id: 3, title: { en: "T" }, slug: "t", status: PostStatusEnum.PUBLISHED, published_at: "2026-01-01T00:00:00Z" });
+    const post = new PostModel({
+      id: 3,
+      title: { en: "T" },
+      slug: "t",
+      status: PostStatusEnum.PUBLISHED,
+      published_at: "2026-01-01T00:00:00Z",
+    });
     expect(post.getTitle("en")).toBe("T");
     expect(post.isPublished()).toBe(true);
     expect(post.getPublishedAt()?.getUTCFullYear()).toBe(2026);

@@ -12,7 +12,12 @@ export type ErrorStateProps = {
 };
 
 /** Inline error panel for a failed fetch or an error boundary. */
-export const ErrorState: React.FC<ErrorStateProps> = ({ title, description, action, className }) => (
+export const ErrorState: React.FC<ErrorStateProps> = ({
+  title,
+  description,
+  action,
+  className,
+}) => (
   <div
     role="alert"
     className={cn(

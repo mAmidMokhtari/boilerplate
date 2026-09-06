@@ -94,7 +94,8 @@ class ApiClient {
     const signal = requestInit.signal
       ? AbortSignal.any([requestInit.signal, controller.signal])
       : controller.signal;
-    const requestId = (requestInit.headers as Headers | undefined)?.get(REQUEST_ID_HEADER) ?? undefined;
+    const requestId =
+      (requestInit.headers as Headers | undefined)?.get(REQUEST_ID_HEADER) ?? undefined;
 
     try {
       const response = await fetch(this.resolveUrl(path), {

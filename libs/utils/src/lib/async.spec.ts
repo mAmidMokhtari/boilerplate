@@ -8,7 +8,9 @@ describe("async helpers", () => {
     expect(fn).toHaveBeenCalledTimes(2);
 
     const never = vi.fn().mockRejectedValue(new Error("fatal"));
-    await expect(retry(never, { retries: 3, delayMs: 1, shouldRetry: () => false })).rejects.toThrow("fatal");
+    await expect(
+      retry(never, { retries: 3, delayMs: 1, shouldRetry: () => false })
+    ).rejects.toThrow("fatal");
     expect(never).toHaveBeenCalledTimes(1);
   });
 

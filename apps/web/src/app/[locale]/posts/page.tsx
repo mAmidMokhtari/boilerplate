@@ -10,7 +10,11 @@ export const revalidate = 60;
 export async function generateMetadata({ params }: { params: LocaleParams }): Promise<Metadata> {
   const { locale } = await resolveLocaleParams(params);
   const t = await getTranslations({ locale, namespace: "posts" });
-  return { title: t("title"), description: t("description"), alternates: localizedAlternates(locale, "/posts") };
+  return {
+    title: t("title"),
+    description: t("description"),
+    alternates: localizedAlternates(locale, "/posts"),
+  };
 }
 
 /**
@@ -23,7 +27,11 @@ export default async function PostsPage({ params }: { params: LocaleParams }) {
 
   return (
     <main className="container py-10">
-      <PostsContent locale={locale} initialRaw={initial.status === "ok" ? initial.raw : null} unavailable={initial.status === "unavailable"} />
+      <PostsContent
+        locale={locale}
+        initialRaw={initial.status === "ok" ? initial.raw : null}
+        unavailable={initial.status === "unavailable"}
+      />
     </main>
   );
 }

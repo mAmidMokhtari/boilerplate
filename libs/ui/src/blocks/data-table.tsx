@@ -40,7 +40,8 @@ export function DataTable<TRow>({
   className,
 }: DataTableProps<TRow>) {
   if (isLoading) return <TableSkeleton columns={columns.length} />;
-  if (rows.length === 0) return <EmptyState title={emptyTitle} description={emptyDescription} action={emptyAction} />;
+  if (rows.length === 0)
+    return <EmptyState title={emptyTitle} description={emptyDescription} action={emptyAction} />;
 
   return (
     <div className={cn("overflow-x-auto rounded-lg border", className)}>
@@ -48,7 +49,10 @@ export function DataTable<TRow>({
         <TableHeader>
           <TableRow>
             {columns.map((col) => (
-              <TableHead key={col.id} className={cn(col.align === "end" && "text-end", col.className)}>
+              <TableHead
+                key={col.id}
+                className={cn(col.align === "end" && "text-end", col.className)}
+              >
                 {col.header}
               </TableHead>
             ))}
@@ -58,7 +62,10 @@ export function DataTable<TRow>({
           {rows.map((row) => (
             <TableRow key={rowKey(row)}>
               {columns.map((col) => (
-                <TableCell key={col.id} className={cn(col.align === "end" && "text-end tabular-nums", col.className)}>
+                <TableCell
+                  key={col.id}
+                  className={cn(col.align === "end" && "text-end tabular-nums", col.className)}
+                >
                   {col.cell(row)}
                 </TableCell>
               ))}

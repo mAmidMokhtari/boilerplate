@@ -24,9 +24,12 @@ export function useDebouncedCallback<TArgs extends unknown[]>(
     fnRef.current = fn;
   }, [fn]);
 
-  useEffect(() => () => {
-    if (timerRef.current) clearTimeout(timerRef.current);
-  }, []);
+  useEffect(
+    () => () => {
+      if (timerRef.current) clearTimeout(timerRef.current);
+    },
+    []
+  );
 
   return useMemo(
     () =>

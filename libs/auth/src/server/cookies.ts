@@ -34,7 +34,10 @@ export function setAuthCookies(
   });
 }
 
-export function clearAuthCookies(res: NextResponse, { names, domain }: Pick<CookieWriterOptions, "names" | "domain">): void {
+export function clearAuthCookies(
+  res: NextResponse,
+  { names, domain }: Pick<CookieWriterOptions, "names" | "domain">
+): void {
   for (const name of [names.access, names.refresh]) {
     res.cookies.set(name, "", { httpOnly: true, path: "/", maxAge: 0, domain });
   }

@@ -78,7 +78,6 @@ export const endpoints = {
     },
   },
 
-
   media: {
     list: `${admin}/media`,
     upload: `${admin}/media`,

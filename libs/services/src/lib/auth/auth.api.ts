@@ -49,7 +49,10 @@ export const authApi = {
   },
 
   updateProfile: async (audience: AuthedAudience, data: UpdateProfileDto): Promise<UserModel> => {
-    const raw = await apiClient.patch<ApiResponse<IUserModel>>(endpoints.me(audience).updateProfile, data);
+    const raw = await apiClient.patch<ApiResponse<IUserModel>>(
+      endpoints.me(audience).updateProfile,
+      data
+    );
     return new UserModel(raw.data);
   },
 

@@ -36,7 +36,9 @@ export const usersApi = {
   },
 
   syncRoles: async (id: number, roles: string[]): Promise<UserModel> => {
-    const raw = await apiClient.put<ApiResponse<IUserModel>>(endpoints.users.syncRoles(id), { roles });
+    const raw = await apiClient.put<ApiResponse<IUserModel>>(endpoints.users.syncRoles(id), {
+      roles,
+    });
     return new UserModel(raw.data);
   },
 };

@@ -10,7 +10,10 @@ export function useFormatMoney() {
   const locale = useLocale();
   const currency = usePreferencesStore((s) => s.currency);
   return useCallback(
-    (amount: number | string | null | undefined, override?: { currency?: string } & FormatMoneyOptions) => {
+    (
+      amount: number | string | null | undefined,
+      override?: { currency?: string } & FormatMoneyOptions
+    ) => {
       const { currency: currencyOverride, ...options } = override ?? {};
       return formatMoney(amount, locale, currencyOverride ?? currency, options);
     },

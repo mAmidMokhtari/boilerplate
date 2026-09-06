@@ -8,7 +8,12 @@ import type { PageGeneratorSchema } from "./schema";
 export async function pageGenerator(tree: Tree, options: PageGeneratorSchema): Promise<void> {
   const n = names(options.name);
   const routedRoot = options.app === "web" ? "src/app/[locale]" : "src/app/(dashboard)";
-  const target = joinPathFragments("apps", options.app, routedRoot, options.path.replace(/^\/+|\/+$/g, ""));
+  const target = joinPathFragments(
+    "apps",
+    options.app,
+    routedRoot,
+    options.path.replace(/^\/+|\/+$/g, "")
+  );
   const routeSegment = options.path.split("/").filter(Boolean).pop() ?? n.fileName;
 
   if (tree.exists(joinPathFragments(target, "page.tsx"))) {
@@ -24,7 +29,12 @@ export async function pageGenerator(tree: Tree, options: PageGeneratorSchema): P
     tmpl: "",
   };
 
-  generateFiles(tree, joinPathFragments(import.meta.dirname, "files", options.app), target, substitutions);
+  generateFiles(
+    tree,
+    joinPathFragments(import.meta.dirname, "files", options.app),
+    target,
+    substitutions
+  );
 
   if (!substitutions.withLoading) tree.delete(joinPathFragments(target, "loading.tsx"));
   if (!substitutions.withError) tree.delete(joinPathFragments(target, "error.tsx"));

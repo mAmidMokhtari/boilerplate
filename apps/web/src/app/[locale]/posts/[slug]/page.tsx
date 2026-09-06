@@ -47,15 +47,23 @@ export default async function PostPage({ params }: { params: PostParams }) {
   return (
     <main className="container max-w-3xl space-y-8 py-10">
       <header className="space-y-3">
-        <p className="text-sm text-muted-foreground">{formatDate(post.getPublishedAt(), locale, { dateStyle: "long" })}</p>
-        <h1 className="text-4xl font-semibold tracking-tight text-balance">{post.getTitle(locale)}</h1>
-        {post.getExcerpt(locale) ? <p className="text-lg text-muted-foreground">{post.getExcerpt(locale)}</p> : null}
+        <p className="text-sm text-muted-foreground">
+          {formatDate(post.getPublishedAt(), locale, { dateStyle: "long" })}
+        </p>
+        <h1 className="text-4xl font-semibold tracking-tight text-balance">
+          {post.getTitle(locale)}
+        </h1>
+        {post.getExcerpt(locale) ? (
+          <p className="text-lg text-muted-foreground">{post.getExcerpt(locale)}</p>
+        ) : null}
       </header>
       {cover ? (
         // Remote CMS images have unknown dimensions, so a plain <img> is deliberate here.
         <img src={cover.getUrl("lg")} alt={cover.getAlt()} className="w-full rounded-lg border" />
       ) : null}
-      <article className="prose prose-neutral max-w-none dark:prose-invert whitespace-pre-wrap">{post.getBody(locale)}</article>
+      <article className="prose prose-neutral max-w-none dark:prose-invert whitespace-pre-wrap">
+        {post.getBody(locale)}
+      </article>
     </main>
   );
 }

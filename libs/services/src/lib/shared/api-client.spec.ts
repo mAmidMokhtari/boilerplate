@@ -3,7 +3,10 @@ import { apiClient, configureApiClient, resetApiClient } from "./api-client";
 import { ApiClientError } from "./api-error";
 
 function jsonResponse(body: unknown, status = 200): Response {
-  return new Response(JSON.stringify(body), { status, headers: { "content-type": "application/json" } });
+  return new Response(JSON.stringify(body), {
+    status,
+    headers: { "content-type": "application/json" },
+  });
 }
 
 describe("apiClient", () => {
@@ -54,7 +57,9 @@ describe("apiClient", () => {
   it("normalizes HTTP errors and notifies on 401", async () => {
     const onUnauthorized = vi.fn();
     configureApiClient({ onUnauthorized });
-    fetchMock.mockResolvedValueOnce(jsonResponse({ message: "Nope", errors: { email: ["taken"] }, code: 2001 }, 401));
+    fetchMock.mockResolvedValueOnce(
+      jsonResponse({ message: "Nope", errors: { email: ["taken"] }, code: 2001 }, 401)
+    );
 
     const error = await apiClient.get("/x").catch((e: unknown) => e);
     expect(error).toBeInstanceOf(ApiClientError);

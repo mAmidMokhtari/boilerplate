@@ -7,7 +7,14 @@ import { Button } from "@repo/ui/button";
 import { Field, FieldDescription, FieldError, FieldLabel } from "@repo/ui/field";
 import { Input } from "@repo/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@repo/ui/select";
-import { Sheet, SheetContent, SheetDescription, SheetFooter, SheetHeader, SheetTitle } from "@repo/ui/sheet";
+import {
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetFooter,
+  SheetHeader,
+  SheetTitle,
+} from "@repo/ui/sheet";
 import { Textarea } from "@repo/ui/textarea";
 import { slugify } from "@repo/utils";
 import { TEXTS } from "../texts";
@@ -22,18 +29,32 @@ export type PostFormDrawerProps = {
 };
 
 /** Create/edit form for a post. Presentational: all state comes from the page hook. */
-export function PostFormDrawer({ open, onOpenChange, form, onSubmit, isPending, mode }: PostFormDrawerProps) {
+export function PostFormDrawer({
+  open,
+  onOpenChange,
+  form,
+  onSubmit,
+  isPending,
+  mode,
+}: PostFormDrawerProps) {
   const { errors } = form.formState;
 
   return (
     <Sheet open={open} onOpenChange={onOpenChange}>
       <SheetContent className="flex w-full flex-col sm:max-w-lg">
         <SheetHeader>
-          <SheetTitle>{mode === "edit" ? TEXTS.DRAWER_EDIT_TITLE : TEXTS.DRAWER_CREATE_TITLE}</SheetTitle>
+          <SheetTitle>
+            {mode === "edit" ? TEXTS.DRAWER_EDIT_TITLE : TEXTS.DRAWER_CREATE_TITLE}
+          </SheetTitle>
           <SheetDescription>{TEXTS.DRAWER_DESCRIPTION}</SheetDescription>
         </SheetHeader>
 
-        <form id="post-form" onSubmit={onSubmit} noValidate className="flex-1 space-y-4 overflow-y-auto px-4">
+        <form
+          id="post-form"
+          onSubmit={onSubmit}
+          noValidate
+          className="flex-1 space-y-4 overflow-y-auto px-4"
+        >
           <Field data-invalid={!!errors.title?.en}>
             <FieldLabel htmlFor="title-en">{TEXTS.FIELD_TITLE_EN}</FieldLabel>
             <Input
@@ -90,11 +111,20 @@ export function PostFormDrawer({ open, onOpenChange, form, onSubmit, isPending, 
             />
           </Field>
 
-          {errors.root ? <p role="alert" className="text-sm text-destructive">{errors.root.message}</p> : null}
+          {errors.root ? (
+            <p role="alert" className="text-sm text-destructive">
+              {errors.root.message}
+            </p>
+          ) : null}
         </form>
 
         <SheetFooter className="flex-row justify-end gap-2">
-          <Button type="button" variant="outline" onClick={() => onOpenChange(false)} disabled={isPending}>
+          <Button
+            type="button"
+            variant="outline"
+            onClick={() => onOpenChange(false)}
+            disabled={isPending}
+          >
             {TEXTS.CANCEL}
           </Button>
           <Button type="submit" form="post-form" disabled={isPending}>

@@ -3,10 +3,7 @@
   "defaultBase": "develop",
   "analytics": false,
   "namedInputs": {
-    "default": [
-      "{projectRoot}/**/*",
-      "sharedGlobals"
-    ],
+    "default": ["{projectRoot}/**/*", "sharedGlobals"],
     "production": [
       "default",
       "!{projectRoot}/eslint.config.mjs",
@@ -80,14 +77,9 @@
   "targetDefaults": {
     "build": {
       "cache": true,
-      "inputs": [
-        "production",
-        "^production"
-      ],
+      "inputs": ["production", "^production"],
       "//": "Libs are source-resolved and have no build target; their .d.ts come from typecheck (tsc --build), which Next's own tsc then reads.",
-      "dependsOn": [
-        "^typecheck"
-      ]
+      "dependsOn": ["^typecheck"]
     },
     "lint": {
       "cache": true
@@ -100,9 +92,7 @@
     },
     "e2e": {
       "cache": true,
-      "dependsOn": [
-        "^build"
-      ]
+      "dependsOn": ["^build"]
     }
   },
   "generators": {

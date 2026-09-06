@@ -17,11 +17,21 @@ export type RenderWithProvidersOptions = Omit<RenderOptions, "wrapper"> & {
  */
 export function renderWithProviders(
   ui: ReactElement,
-  { queryClient = createTestQueryClient(), locale = "en", messages = {}, ...options }: RenderWithProvidersOptions = {}
+  {
+    queryClient = createTestQueryClient(),
+    locale = "en",
+    messages = {},
+    ...options
+  }: RenderWithProvidersOptions = {}
 ): RenderResult & { queryClient: QueryClient } {
   const Wrapper = ({ children }: { children: ReactNode }) => (
     <QueryClientProvider client={queryClient}>
-      <NextIntlClientProvider locale={locale} messages={messages} onError={() => undefined} getMessageFallback={({ key }) => key}>
+      <NextIntlClientProvider
+        locale={locale}
+        messages={messages}
+        onError={() => undefined}
+        getMessageFallback={({ key }) => key}
+      >
         {children}
       </NextIntlClientProvider>
     </QueryClientProvider>

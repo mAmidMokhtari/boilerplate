@@ -12,7 +12,13 @@ export type EmptyStateProps = {
 };
 
 /** Centered placeholder for lists and tables with no rows. */
-export const EmptyState: React.FC<EmptyStateProps> = ({ title, description, icon, action, className }) => (
+export const EmptyState: React.FC<EmptyStateProps> = ({
+  title,
+  description,
+  icon,
+  action,
+  className,
+}) => (
   <div
     role="status"
     className={cn(

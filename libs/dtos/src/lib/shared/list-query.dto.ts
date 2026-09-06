@@ -11,7 +11,9 @@ export const MAX_PAGE_SIZE = 100;
  */
 function intParam(min: number, max?: number) {
   const bounded = max == null ? z.number().int().min(min) : z.number().int().min(min).max(max);
-  return z.union([z.number(), z.string().regex(/^\d+$/, "Must be a number").transform(Number)]).pipe(bounded);
+  return z
+    .union([z.number(), z.string().regex(/^\d+$/, "Must be a number").transform(Number)])
+    .pipe(bounded);
 }
 
 /**

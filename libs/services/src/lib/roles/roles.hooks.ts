@@ -27,7 +27,9 @@ export function useCreateRole(options?: BaseMutation<RoleModel, RolePayload>) {
   });
 }
 
-export function useUpdateRole(options?: BaseMutation<RoleModel, { id: number; data: RolePayload }>) {
+export function useUpdateRole(
+  options?: BaseMutation<RoleModel, { id: number; data: RolePayload }>
+) {
   return useMutation({
     mutationFn: ({ id, data }: { id: number; data: RolePayload }) => rolesApi.update(id, data),
     invalidates: [rolesKeys.all],
