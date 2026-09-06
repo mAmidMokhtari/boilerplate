@@ -1,0 +1,11 @@
+import type { Get<%= plural.className %>ListInput } from "@repo/dtos";
+
+export const <%= plural.constantName %>_QUERY_KEY = ["<%= plural.fileName %>"] as const;
+
+export const <%= plural.propertyName %>Keys = {
+  all: <%= plural.constantName %>_QUERY_KEY,
+  lists: () => [...<%= plural.constantName %>_QUERY_KEY, "list"] as const,
+  list: (params?: Get<%= plural.className %>ListInput) => [...<%= plural.constantName %>_QUERY_KEY, "list", params ?? {}] as const,
+  detail: (id: number) => [...<%= plural.constantName %>_QUERY_KEY, "detail", id] as const,
+<% if (isPublic) { %>  bySlug: (slug: string) => [...<%= plural.constantName %>_QUERY_KEY, "slug", slug] as const,
+<% } %>};

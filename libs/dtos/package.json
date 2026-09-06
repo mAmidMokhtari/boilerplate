@@ -1,0 +1,30 @@
+{
+  "name": "@repo/dtos",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "sideEffects": false,
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "exports": {
+    ".": {
+      "@repo/source": "./src/index.ts",
+      "types": "./src/index.ts",
+      "import": "./src/index.ts",
+      "default": "./src/index.ts"
+    },
+    "./package.json": "./package.json"
+  },
+  "nx": {
+    "name": "dtos",
+    "tags": [
+      "type:dto"
+    ],
+    "sourceRoot": "libs/dtos/src",
+    "projectType": "library"
+  },
+  "dependencies": {
+    "zod": "^4.5.4",
+    "@repo/enums": "workspace:*"
+  }
+}

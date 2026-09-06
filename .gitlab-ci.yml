@@ -1,0 +1,18 @@
+stages:
+  - lint
+  - build
+  - deploy
+
+variables:
+  NX_DAEMON: "false"
+  NEXT_TELEMETRY_DISABLED: "1"
+
+.docker_login:
+  before_script:
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+
+include:
+  - local: .ci/branch.yml
+  - local: .ci/quality.yml
+  - local: .ci/build.yml
+  - local: .ci/deploy.yml

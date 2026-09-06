@@ -1,0 +1,43 @@
+{
+  "extends": "./tsconfig.base.json",
+  "compileOnSave": false,
+  "files": [],
+  "references": [
+    {
+      "path": "./apps/web"
+    },
+    {
+      "path": "./libs/middleware"
+    },
+    {
+      "path": "./libs/services"
+    },
+    {
+      "path": "./libs/testing"
+    },
+    {
+      "path": "./libs/config"
+    },
+    {
+      "path": "./libs/models"
+    },
+    {
+      "path": "./apps/admin"
+    },
+    {
+      "path": "./libs/enums"
+    },
+    {
+      "path": "./libs/utils"
+    },
+    {
+      "path": "./libs/auth"
+    },
+    {
+      "path": "./libs/dtos"
+    },
+    {
+      "path": "./libs/ui"
+    }
+  ]
+}

@@ -1,0 +1,48 @@
+# One image per app per environment. The env file (NEXT_PUBLIC_* values are
+# inlined at build time) is fetched from a config repository and passed to
+# docker as a build secret so it never lands in an image layer.
+.build_image:
+  extends: .docker_login
+  stage: build
+  image: docker:27
+  services:
+    - docker:27-dind
+  script:
+    - curl -fsS -o env_file --header "PRIVATE-TOKEN:${CONFIG_REPO_TOKEN}" "${CI_API_V4_URL}/projects/${CONFIG_PROJECT_ID}/repository/files/${ENV_FILE}/raw?ref=main"
+    - docker build --build-arg APP_NAME=${APP_NAME} --secret id=env_file,src=env_file --target=runner -t ${CI_REGISTRY_IMAGE}/${APP_NAME}:${TAG} .
+    - docker push ${CI_REGISTRY_IMAGE}/${APP_NAME}:${TAG}
+  when: manual
+  allow_failure: false
+
+# ── develop → staging ─────────────────────────────────────────────────────────
+build_staging_web:
+  extends: .build_image
+  variables: { APP_NAME: web, ENV_FILE: staging-web.env, TAG: $CI_COMMIT_SHA }
+  rules: [{ if: $CI_COMMIT_BRANCH == "develop" }]
+
+build_staging_admin:
+  extends: .build_image
+  variables: { APP_NAME: admin, ENV_FILE: staging-admin.env, TAG: $CI_COMMIT_SHA }
+  rules: [{ if: $CI_COMMIT_BRANCH == "develop" }]
+
+# ── tag on main → production ──────────────────────────────────────────────────
+.production_guard:
+  before_script:
+    - |
+      git fetch origin main
+      if git branch -r --contains "$(git rev-parse "$CI_COMMIT_TAG^{commit}")" | grep -q 'origin/main'; then
+        echo "Tag $CI_COMMIT_TAG is on main"
+      else
+        echo "Tag $CI_COMMIT_TAG must be on main"; exit 1
+      fi
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+
+build_production_web:
+  extends: [.build_image, .production_guard]
+  variables: { APP_NAME: web, ENV_FILE: production-web.env, TAG: $CI_COMMIT_TAG }
+  rules: [{ if: $CI_COMMIT_TAG }]
+
+build_production_admin:
+  extends: [.build_image, .production_guard]
+  variables: { APP_NAME: admin, ENV_FILE: production-admin.env, TAG: $CI_COMMIT_TAG }
+  rules: [{ if: $CI_COMMIT_TAG }]

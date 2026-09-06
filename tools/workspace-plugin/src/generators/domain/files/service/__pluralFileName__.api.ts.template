@@ -1,0 +1,48 @@
+import type { Create<%= className %>Dto, Get<%= plural.className %>ListInput, Update<%= className %>Dto } from "@repo/dtos";
+import type { I<%= className %>Model, IPaginatedResponseModel } from "@repo/models";
+import { <%= className %>Model, PaginatedResponseModel } from "@repo/models";
+import { withQuery } from "@repo/utils";
+import { apiClient<% if (isPublic) { %>, type RequestOptions<% } %> } from "../shared/api-client";
+import { endpoints } from "../shared/endpoints";
+import type { ApiResponse } from "../shared/types";
+
+export type <%= plural.className %>Page = PaginatedResponseModel<I<%= className %>Model, <%= className %>Model>;
+<% if (isPublic) { %>
+/** Public reads. Pass Next cache hints from Server Components via `options`. */
+export const public<%= plural.className %>Api = {
+  getList: async (params: Get<%= plural.className %>ListInput = {}, options?: RequestOptions): Promise<<%= plural.className %>Page> => {
+    const raw = await apiClient.get<IPaginatedResponseModel<I<%= className %>Model>>(withQuery(endpoints.<%= plural.propertyName %>.public.list, params), options);
+    return new PaginatedResponseModel(<%= className %>Model, raw);
+  },
+
+  getBySlug: async (slug: string, options?: RequestOptions): Promise<<%= className %>Model> => {
+    const raw = await apiClient.get<ApiResponse<I<%= className %>Model>>(endpoints.<%= plural.propertyName %>.public.bySlug(slug), options);
+    return new <%= className %>Model(raw.data);
+  },
+};
+<% } %>
+export const <%= plural.propertyName %>Api = {
+  getList: async (params: Get<%= plural.className %>ListInput = {}): Promise<<%= plural.className %>Page> => {
+    const raw = await apiClient.get<IPaginatedResponseModel<I<%= className %>Model>>(withQuery(endpoints.<%= plural.propertyName %>.<%= audience %>.list, params));
+    return new PaginatedResponseModel(<%= className %>Model, raw);
+  },
+
+  getById: async (id: number): Promise<<%= className %>Model> => {
+    const raw = await apiClient.get<ApiResponse<I<%= className %>Model>>(endpoints.<%= plural.propertyName %>.<%= audience %>.byId(id));
+    return new <%= className %>Model(raw.data);
+  },
+
+  create: async (data: Create<%= className %>Dto): Promise<<%= className %>Model> => {
+    const raw = await apiClient.post<ApiResponse<I<%= className %>Model>>(endpoints.<%= plural.propertyName %>.<%= audience %>.create, data);
+    return new <%= className %>Model(raw.data);
+  },
+
+  update: async (id: number, data: Update<%= className %>Dto): Promise<<%= className %>Model> => {
+    const raw = await apiClient.patch<ApiResponse<I<%= className %>Model>>(endpoints.<%= plural.propertyName %>.<%= audience %>.update(id), data);
+    return new <%= className %>Model(raw.data);
+  },
+
+  delete: async (id: number): Promise<void> => {
+    await apiClient.delete(endpoints.<%= plural.propertyName %>.<%= audience %>.delete(id));
+  },
+};

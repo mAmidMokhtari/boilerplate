@@ -1,0 +1,16 @@
+export const TEXTS = {
+  PAGE_TITLE: "Users",
+  PAGE_DESCRIPTION: "Staff accounts and their roles.",
+  SEARCH_PLACEHOLDER: "Search users…",
+  COL_NAME: "Name",
+  COL_EMAIL: "Email",
+  COL_ROLES: "Roles",
+  COL_STATUS: "Status",
+  COL_CREATED: "Created",
+  EMPTY_TITLE: "No users found",
+  EMPTY_DESCRIPTION: "Try a different search.",
+  ERROR_TITLE: "Could not load users",
+  RETRY: "Retry",
+  PAGINATION_PREVIOUS: "Previous",
+  PAGINATION_NEXT: "Next",
+} as const;

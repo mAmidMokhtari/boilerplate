@@ -1,0 +1,45 @@
+# dependencies
+node_modules
+.pnpm-store
+
+# build output
+dist
+out-tsc
+.next
+storybook-static
+tmp
+
+# tests
+coverage
+test-output
+playwright-report
+test-results
+/apps/*-e2e/.playwright
+
+# env — only the example is committed
+.env
+.env.*
+!.env.example
+
+# nx
+.nx/cache
+.nx/workspace-data
+.nx/migrate-runs
+.nx/polygraph
+
+# editors & OS
+.idea
+.vscode/*
+!.vscode/settings.json
+!.vscode/extensions.json
+.DS_Store
+Thumbs.db
+
+# claude
+.claude/worktrees
+.claude/settings.local.json
+
+# logs
+*.log
+npm-debug.log*
+pnpm-debug.log*

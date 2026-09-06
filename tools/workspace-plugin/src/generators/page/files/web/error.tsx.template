@@ -1,0 +1,17 @@
+"use client";
+
+import { useTranslations } from "next-intl";
+import { ErrorState } from "@repo/ui/blocks/error-state";
+
+export default function <%= className %>Error({ error, reset }: { error: Error & { digest?: string }; reset: () => void }) {
+  const t = useTranslations("common");
+  return (
+    <main className="container py-8">
+      <ErrorState
+        title={t("error.title")}
+        description={error.message}
+        action={{ label: t("error.retry"), onClick: reset }}
+      />
+    </main>
+  );
+}

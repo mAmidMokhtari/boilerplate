@@ -1,0 +1,20 @@
+{
+  "name": "@repo/workspace-plugin",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "main": "./src/index.ts",
+  "generators": "./generators.json",
+  "nx": {
+    "name": "workspace-plugin",
+    "tags": [
+      "type:tooling"
+    ],
+    "sourceRoot": "tools/workspace-plugin/src",
+    "projectType": "library",
+    "targets": {}
+  },
+  "dependencies": {
+    "@nx/devkit": "23.2.0"
+  }
+}

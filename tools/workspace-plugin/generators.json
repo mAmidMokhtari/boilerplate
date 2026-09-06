@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/schema",
+  "name": "workspace-plugin",
+  "version": "0.1.0",
+  "generators": {
+    "page": {
+      "factory": "./src/generators/page/generator",
+      "schema": "./src/generators/page/schema.json",
+      "description": "Scaffold a page that follows the app's file contract (page.tsx + components/index.tsx + index.hook.ts [+ texts.ts])."
+    },
+    "domain": {
+      "factory": "./src/generators/domain/generator",
+      "schema": "./src/generators/domain/schema.json",
+      "description": "Scaffold a full vertical slice: model, dto, service (api + hooks + query keys)."
+    }
+  }
+}

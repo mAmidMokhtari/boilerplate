@@ -1,0 +1,41 @@
+{
+  "name": "@repo/auth",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "sideEffects": false,
+  "exports": {
+    "./server": {
+      "@repo/source": "./src/server/index.ts",
+      "types": "./src/server/index.ts",
+      "import": "./src/server/index.ts",
+      "default": "./src/server/index.ts"
+    },
+    "./client": {
+      "@repo/source": "./src/client/index.ts",
+      "types": "./src/client/index.ts",
+      "import": "./src/client/index.ts",
+      "default": "./src/client/index.ts"
+    },
+    "./package.json": "./package.json"
+  },
+  "nx": {
+    "name": "auth",
+    "tags": [
+      "type:auth"
+    ],
+    "sourceRoot": "libs/auth/src",
+    "projectType": "library"
+  },
+  "dependencies": {
+    "server-only": "^0.0.1",
+    "@repo/config": "workspace:*",
+    "@repo/models": "workspace:*",
+    "@repo/services": "workspace:*",
+    "@repo/utils": "workspace:*"
+  },
+  "peerDependencies": {
+    "next": ">=16",
+    "react": "^19.0.0"
+  }
+}

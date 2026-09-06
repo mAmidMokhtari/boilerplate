@@ -1,0 +1,20 @@
+{
+  "extraKnownMarketplaces": {
+    "nx-claude-plugins": {
+      "source": { "source": "github", "repo": "nrwl/nx-ai-agents-config" }
+    }
+  },
+  "enabledPlugins": { "nx@nx-claude-plugins": true },
+  "permissions": {
+    "allow": [
+      "Bash(pnpm nx *)",
+      "Bash(pnpm check*)",
+      "Bash(pnpm lint*)",
+      "Bash(pnpm typecheck*)",
+      "Bash(pnpm test*)",
+      "Bash(git status*)",
+      "Bash(git diff*)",
+      "Bash(git log*)"
+    ]
+  }
+}

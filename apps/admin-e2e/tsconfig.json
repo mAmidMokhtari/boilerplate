@@ -1,0 +1,16 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "customConditions": null,
+    "composite": false,
+    "emitDeclarationOnly": false,
+    "noEmit": true,
+    "allowJs": true,
+    "sourceMap": false,
+    "types": ["node"]
+  },
+  "include": ["playwright.config.mts", "src/**/*.ts", "src/**/*.d.ts"],
+  "exclude": ["out-tsc", "test-output", "playwright-report", "eslint.config.mjs"]
+}

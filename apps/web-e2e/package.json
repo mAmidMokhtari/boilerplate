@@ -1,0 +1,11 @@
+{
+  "name": "@repo/web-e2e",
+  "version": "0.1.0",
+  "private": true,
+  "nx": {
+    "name": "web-e2e",
+    "projectType": "application",
+    "tags": ["type:e2e", "scope:web"],
+    "implicitDependencies": ["web"]
+  }
+}

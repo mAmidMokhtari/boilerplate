@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/schema",
+  "$id": "Page",
+  "title": "Generate a page following the app contract",
+  "type": "object",
+  "properties": {
+    "app": {
+      "type": "string",
+      "description": "Target app",
+      "enum": ["web", "admin"],
+      "x-prompt": { "message": "Which app?", "type": "list", "items": ["web", "admin"] }
+    },
+    "path": {
+      "type": "string",
+      "description": "Route path relative to the app's routed root, e.g. catalog/brands or blog/[slug]",
+      "x-prompt": "Route path (e.g. catalog/brands)?"
+    },
+    "name": {
+      "type": "string",
+      "description": "Feature name used for components and hooks (PascalCase or kebab-case)",
+      "x-prompt": "Feature name (e.g. Brands)?"
+    },
+    "withLoading": { "type": "boolean", "default": true, "description": "Also create loading.tsx" },
+    "withError": { "type": "boolean", "default": true, "description": "Also create error.tsx" }
+  },
+  "required": ["app", "path", "name"]
+}

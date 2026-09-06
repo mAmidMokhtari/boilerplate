@@ -1,0 +1,25 @@
+"use client";
+
+import { useTranslations } from "next-intl";
+import { EmptyState } from "@repo/ui/blocks/empty-state";
+import { <%= hookName %> } from "./index.hook";
+
+export type <%= className %>ContentProps = {
+  locale: string;
+};
+
+export function <%= className %>Content({ locale }: <%= className %>ContentProps) {
+  const t = useTranslations("<%= propertyName %>");
+  const vm = <%= hookName %>({ locale });
+
+  return (
+    <section className="space-y-6">
+      <header>
+        <h1 className="text-2xl font-semibold tracking-tight">{t("title")}</h1>
+        <p className="text-muted-foreground">{t("description")}</p>
+      </header>
+
+      {vm.isEmpty ? <EmptyState title={t("empty.title")} description={t("empty.description")} /> : null}
+    </section>
+  );
+}

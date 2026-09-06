@@ -1,0 +1,21 @@
+import { z } from "zod";
+import { listQuerySchema } from "../shared/list-query.dto";
+import { slugSchema } from "../shared/id-param.dto";
+
+export const get<%= plural.className %>ListSchema = listQuerySchema.extend({
+  is_active: z.coerce.boolean().optional(),
+});
+
+export const create<%= className %>Schema = z.object({
+  name: z.string().trim().min(1, "Name is required").max(255),
+  slug: slugSchema,
+  is_active: z.boolean().default(true),
+});
+
+export const update<%= className %>Schema = create<%= className %>Schema.partial();
+
+export type Get<%= plural.className %>ListDto = z.infer<typeof get<%= plural.className %>ListSchema>;
+export type Get<%= plural.className %>ListInput = z.input<typeof get<%= plural.className %>ListSchema>;
+export type Create<%= className %>Dto = z.infer<typeof create<%= className %>Schema>;
+export type Create<%= className %>Input = z.input<typeof create<%= className %>Schema>;
+export type Update<%= className %>Dto = z.infer<typeof update<%= className %>Schema>;

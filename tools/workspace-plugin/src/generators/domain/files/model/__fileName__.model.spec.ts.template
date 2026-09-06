@@ -1,0 +1,19 @@
+import { describe, expect, it } from "vitest";
+import { <%= className %>Model } from "./<%= fileName %>.model";
+
+describe("<%= className %>Model", () => {
+  it("returns safe defaults for an empty payload", () => {
+    const model = new <%= className %>Model();
+    expect(model.getId()).toBe(0);
+    expect(model.getName()).toBe("");
+    expect(model.isActive()).toBe(false);
+  });
+
+  it("exposes payload fields through getters", () => {
+    const model = new <%= className %>Model({ id: 7, name: "Acme", slug: "acme", is_active: true });
+    expect(model.getId()).toBe(7);
+    expect(model.getName()).toBe("Acme");
+    expect(model.getSlug()).toBe("acme");
+    expect(model.isActive()).toBe(true);
+  });
+});

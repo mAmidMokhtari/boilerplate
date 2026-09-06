@@ -1,0 +1,65 @@
+{
+  "name": "@repo/admin",
+  "version": "0.1.0",
+  "private": true,
+  "nx": {
+    "name": "admin",
+    "sourceRoot": "apps/admin/src",
+    "projectType": "application",
+    "tags": [
+      "type:app",
+      "scope:admin"
+    ],
+    "targets": {
+      "typecheck": {
+        "command": "tsc -p tsconfig.json --noEmit",
+        "options": {
+          "cwd": "apps/admin"
+        },
+        "cache": true,
+        "inputs": [
+          "default",
+          "^default"
+        ],
+        "dependsOn": [
+          "^typecheck"
+        ]
+      },
+      "build": {
+        "dependsOn": [
+          "^typecheck"
+        ]
+      }
+    }
+  },
+  "dependencies": {
+    "@hookform/resolvers": "^5.9.1",
+    "@repo/auth": "workspace:*",
+    "@repo/config": "workspace:*",
+    "@repo/dtos": "workspace:*",
+    "@repo/enums": "workspace:*",
+    "@repo/middleware": "workspace:*",
+    "@repo/models": "workspace:*",
+    "@repo/services": "workspace:*",
+    "@repo/ui": "workspace:*",
+    "@repo/utils": "workspace:*",
+    "@tanstack/react-query": "^5.102.8",
+    "@tanstack/react-query-devtools": "^5.102.8",
+    "lucide-react": "^1.41.0",
+    "next": "~16.3.4",
+    "next-themes": "^0.4.6",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8",
+    "react-hook-form": "^7.87.0",
+    "server-only": "^0.0.1",
+    "sonner": "^2.0.8",
+    "zod": "^4.5.4",
+    "zustand": "^5.0.15"
+  },
+  "devDependencies": {
+    "@repo/testing": "workspace:*",
+    "@tailwindcss/postcss": "^4.3.3",
+    "postcss": "^8.5.28",
+    "tailwindcss": "^4.3.3"
+  }
+}

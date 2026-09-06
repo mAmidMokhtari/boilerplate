@@ -1,0 +1,40 @@
+"use client";
+
+import type { Create<%= className %>Dto, Get<%= plural.className %>ListInput, Update<%= className %>Dto } from "@repo/dtos";
+import type { <%= className %>Model } from "@repo/models";
+import { useMutation, useQuery } from "../shared/hooks";
+import type { BaseMutation, BaseQuery } from "../shared/types";
+import { <%= plural.propertyName %>Api<% if (isPublic) { %>, public<%= plural.className %>Api<% } %>, type <%= plural.className %>Page } from "./<%= plural.fileName %>.api";
+import { <%= plural.propertyName %>Keys } from "./<%= plural.fileName %>.query-keys";
+<% if (isPublic) { %>
+export function usePublic<%= plural.className %>List(params: Get<%= plural.className %>ListInput = {}, options: BaseQuery<<%= plural.className %>Page> = {}) {
+  return useQuery({ queryKey: [...<%= plural.propertyName %>Keys.list(params), "public"], queryFn: () => public<%= plural.className %>Api.getList(params), ...options });
+}
+
+export function usePublic<%= className %>(slug: string, options: BaseQuery<<%= className %>Model> = {}) {
+  return useQuery({ queryKey: <%= plural.propertyName %>Keys.bySlug(slug), queryFn: () => public<%= plural.className %>Api.getBySlug(slug), enabled: !!slug, ...options });
+}
+<% } %>
+export function use<%= plural.className %>List(params: Get<%= plural.className %>ListInput = {}, options: BaseQuery<<%= plural.className %>Page> = {}) {
+  return useQuery({ queryKey: <%= plural.propertyName %>Keys.list(params), queryFn: () => <%= plural.propertyName %>Api.getList(params), ...options });
+}
+
+export function use<%= className %>(id: number, options: BaseQuery<<%= className %>Model> = {}) {
+  return useQuery({ queryKey: <%= plural.propertyName %>Keys.detail(id), queryFn: () => <%= plural.propertyName %>Api.getById(id), enabled: id > 0, ...options });
+}
+
+export function useCreate<%= className %>(options?: BaseMutation<<%= className %>Model, Create<%= className %>Dto>) {
+  return useMutation({ mutationFn: (data: Create<%= className %>Dto) => <%= plural.propertyName %>Api.create(data), invalidates: [<%= plural.propertyName %>Keys.lists()], options });
+}
+
+export function useUpdate<%= className %>(options?: BaseMutation<<%= className %>Model, { id: number; data: Update<%= className %>Dto }>) {
+  return useMutation({
+    mutationFn: ({ id, data }: { id: number; data: Update<%= className %>Dto }) => <%= plural.propertyName %>Api.update(id, data),
+    invalidates: [<%= plural.propertyName %>Keys.all],
+    options,
+  });
+}
+
+export function useDelete<%= className %>(options?: BaseMutation<void, number>) {
+  return useMutation({ mutationFn: (id: number) => <%= plural.propertyName %>Api.delete(id), invalidates: [<%= plural.propertyName %>Keys.lists()], options });
+}

@@ -1,0 +1,38 @@
+{
+  "name": "@repo/testing",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "sideEffects": false,
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "exports": {
+    ".": {
+      "@repo/source": "./src/index.ts",
+      "types": "./src/index.ts",
+      "import": "./src/index.ts",
+      "default": "./src/index.ts"
+    },
+    "./package.json": "./package.json"
+  },
+  "nx": {
+    "name": "testing",
+    "tags": [
+      "type:testing"
+    ],
+    "sourceRoot": "libs/testing/src",
+    "projectType": "library"
+  },
+  "dependencies": {
+    "@tanstack/react-query": "^5.102.8",
+    "@testing-library/react": "^16.3.3",
+    "next-intl": "^4.14.2",
+    "@repo/services": "workspace:*",
+    "@repo/config": "workspace:*",
+    "@repo/models": "workspace:*"
+  },
+  "peerDependencies": {
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  }
+}

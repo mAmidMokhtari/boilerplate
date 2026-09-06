@@ -1,0 +1,3 @@
+@import "@repo/ui/styles.css";
+
+/* Admin-only overrides. Shared tokens live in libs/ui. */

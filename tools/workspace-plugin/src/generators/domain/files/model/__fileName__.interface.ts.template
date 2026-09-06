@@ -1,0 +1,8 @@
+import type { IBaseModel } from "../base/base.interface";
+
+/** Raw API shape of a <%= className %>. Keep the backend's field names. */
+export type I<%= className %>Model = IBaseModel & {
+  name: string;
+  slug: string;
+  is_active: boolean;
+};

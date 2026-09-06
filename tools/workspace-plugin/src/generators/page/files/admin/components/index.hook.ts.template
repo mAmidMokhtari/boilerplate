@@ -1,0 +1,24 @@
+"use client";
+
+import { useState } from "react";
+import { useDisclosure } from "@repo/utils";
+
+export function useData() {
+  /* --------------------------------- State --------------------------------- */
+  const drawer = useDisclosure();
+  const [isEmpty] = useState(true);
+
+  /* --------------------------------- APIs ---------------------------------- */
+  // const { data, isLoading, error } = useXList(table.query);
+
+  /* --------------------------------- Form ---------------------------------- */
+  // const form = useForm<CreateXInput>({ resolver: zodResolver(createXSchema), defaultValues });
+
+  /* -------------------------------- Handlers ------------------------------- */
+  const openCreate = () => drawer.onOpen();
+
+  /* ------------------------------- LifeCycles ------------------------------ */
+
+  /* --------------------------------- Return -------------------------------- */
+  return { isEmpty, drawer, openCreate };
+}

@@ -1,0 +1,75 @@
+{
+  "meta": {
+    "title": "Boilerplate",
+    "description": "A production-ready Next.js starter."
+  },
+  "nav": {
+    "brand": "Boilerplate",
+    "posts": "Posts",
+    "account": "Account",
+    "login": "Sign in",
+    "logout": "Sign out",
+    "language": "Language",
+    "toggleTheme": "Toggle theme"
+  },
+  "footer": {
+    "copyright": "© {year} Boilerplate",
+    "tagline": "Built with Next.js, Nx and shadcn/ui"
+  },
+  "common": {
+    "sessionExpired": "Your session has expired. Please sign in again.",
+    "error": {
+      "title": "Something went wrong",
+      "retry": "Try again"
+    }
+  },
+  "home": {
+    "title": "Home",
+    "eyebrow": "Starter kit",
+    "headline": "Every recurring decision, already made.",
+    "subheadline": "Auth, i18n, data layer, module boundaries and page contracts are in place. Start at your first domain, not at your first config file.",
+    "ctaPrimary": "Browse posts",
+    "ctaSecondary": "Sign in"
+  },
+  "posts": {
+    "title": "Posts",
+    "description": "The example domain that shows the full vertical slice.",
+    "empty": {
+      "title": "No posts yet",
+      "description": "Publish one from the admin panel and it will show up here."
+    },
+    "unavailable": {
+      "title": "Posts are unavailable right now",
+      "description": "We could not reach the content service. Please try again in a moment.",
+      "retry": "Retry"
+    },
+    "pagination": {
+      "previous": "Previous",
+      "next": "Next",
+      "summary": "Showing {from}–{to} of {total}"
+    }
+  },
+  "login": {
+    "title": "Sign in",
+    "description": "Use the email and password you registered with.",
+    "email": "Email",
+    "password": "Password",
+    "submit": "Sign in",
+    "submitting": "Signing in…"
+  },
+  "account": {
+    "title": "Account",
+    "status": "Status",
+    "memberSince": "Member since",
+    "error": {
+      "title": "Could not load your account",
+      "description": "Please try again.",
+      "retry": "Retry"
+    }
+  },
+  "notFound": {
+    "title": "Page not found",
+    "description": "The page you are looking for does not exist or has moved.",
+    "backHome": "Back to home"
+  }
+}

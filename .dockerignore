@@ -1,0 +1,16 @@
+node_modules
+**/node_modules
+.git
+.nx
+**/.next
+**/dist
+**/coverage
+**/playwright-report
+**/test-results
+**/storybook-static
+.env
+.env.*
+!.env.example
+docs
+*.md
+!README.md

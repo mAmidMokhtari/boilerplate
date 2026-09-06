@@ -1,0 +1,13 @@
+/** Static English copy for the <%= className %> page. */
+export const TEXTS = {
+  PAGE_TITLE: "<%= className %>",
+  PAGE_DESCRIPTION: "Manage <%= fileName.replace(/-/g, " ") %>.",
+  ADD: "Add",
+  EMPTY_TITLE: "Nothing here yet",
+  EMPTY_DESCRIPTION: "Create the first item to get started.",
+  ERROR_TITLE: "Something went wrong",
+  RETRY: "Try again",
+  TOAST_CREATED: "Created",
+  TOAST_UPDATED: "Updated",
+  TOAST_DELETED: "Deleted",
+} as const;

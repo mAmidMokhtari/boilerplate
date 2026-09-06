@@ -1,0 +1,8 @@
+"use client";
+
+import { ErrorState } from "@repo/ui/blocks/error-state";
+import { TEXTS } from "./components/texts";
+
+export default function <%= className %>Error({ error, reset }: { error: Error & { digest?: string }; reset: () => void }) {
+  return <ErrorState title={TEXTS.ERROR_TITLE} description={error.message} action={{ label: TEXTS.RETRY, onClick: reset }} />;
+}

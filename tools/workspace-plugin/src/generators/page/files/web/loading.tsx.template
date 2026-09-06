@@ -1,0 +1,10 @@
+import { Skeleton } from "@repo/ui/skeleton";
+
+export default function Loading() {
+  return (
+    <main className="container space-y-4 py-8">
+      <Skeleton className="h-8 w-48" />
+      <Skeleton className="h-32 w-full" />
+    </main>
+  );
+}

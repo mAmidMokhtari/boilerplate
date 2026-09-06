@@ -1,0 +1,2 @@
+export * from "./<%= fileName %>.interface";
+export * from "./<%= fileName %>.model";

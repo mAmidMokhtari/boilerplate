@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/schema",
+  "$id": "Domain",
+  "title": "Generate a domain vertical slice",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Singular entity name (e.g. brand)",
+      "x-prompt": "Entity name (singular, e.g. brand)?"
+    },
+    "audience": {
+      "type": "string",
+      "enum": ["admin", "customer"],
+      "default": "admin",
+      "description": "Authenticated audience that owns the CRUD endpoints"
+    },
+    "public": {
+      "type": "boolean",
+      "default": false,
+      "description": "Also generate public (/general) read endpoints + hooks"
+    }
+  },
+  "required": ["name"]
+}

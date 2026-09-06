@@ -1,0 +1,14 @@
+# Enforces the branch naming policy documented in AGENTS.md.
+branch_name:
+  stage: lint
+  image: alpine:3.20
+  script:
+    - |
+      case "$CI_COMMIT_REF_NAME" in
+        develop|main) echo "Skipping policy for $CI_COMMIT_REF_NAME"; exit 0 ;;
+        revert-*) echo "Revert branch, skipping"; exit 0 ;;
+        feat/*|feature/*|fix/*|hotfix/*|refactor/*|chore/*|docs/*|test/*|style/*) echo "Branch name OK" ;;
+        *) echo "Invalid branch name: $CI_COMMIT_REF_NAME"; exit 1 ;;
+      esac
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"

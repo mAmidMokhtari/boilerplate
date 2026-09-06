@@ -1,0 +1,16 @@
+packages:
+  - "apps/*"
+  - "libs/*"
+  - "tools/*"
+
+autoInstallPeers: true
+strictPeerDependencies: false
+
+# Packages allowed to run install scripts (pnpm 10 blocks the rest).
+allowBuilds:
+  "@swc/core": true
+  "@tailwindcss/oxide": true
+  esbuild: true
+  nx: true
+  sharp: true
+  unrs-resolver: true

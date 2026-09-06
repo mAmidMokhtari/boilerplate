@@ -1,0 +1,22 @@
+"use client";
+
+import { useState } from "react";
+
+export type Use<%= className %>PageOptions = {
+  locale: string;
+};
+
+export function <%= hookName %>({ locale }: Use<%= className %>PageOptions) {
+  /* --------------------------------- State --------------------------------- */
+  const [isEmpty] = useState(true);
+
+  /* --------------------------------- APIs ---------------------------------- */
+  // const { data, isLoading, error } = useXList(params);
+
+  /* -------------------------------- Handlers ------------------------------- */
+
+  /* ------------------------------- LifeCycles ------------------------------ */
+
+  /* --------------------------------- Return -------------------------------- */
+  return { locale, isEmpty };
+}

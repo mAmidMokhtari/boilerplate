@@ -1,0 +1,20 @@
+"use client";
+
+import { Button } from "@repo/ui/button";
+import { EmptyState } from "@repo/ui/blocks/empty-state";
+import { useData } from "./index.hook";
+import { TEXTS } from "./texts";
+
+export function Index() {
+  const vm = useData();
+
+  return (
+    <div className="space-y-6">
+      <div className="flex items-center justify-end">
+        <Button onClick={vm.openCreate}>{TEXTS.ADD}</Button>
+      </div>
+
+      {vm.isEmpty ? <EmptyState title={TEXTS.EMPTY_TITLE} description={TEXTS.EMPTY_DESCRIPTION} /> : null}
+    </div>
+  );
+}
