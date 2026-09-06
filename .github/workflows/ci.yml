@@ -38,7 +38,12 @@ jobs:
       - run: pnpm install --frozen-lockfile
 
       - name: Derive affected base
+        id: nx-shas
         uses: nrwl/nx-set-shas@v4
+
+      - name: Fallback to current commit on first run
+        if: steps.nx-shas.outputs.noPreviousBuild == 'true'
+        run: echo "NX_BASE=${NX_HEAD}" >> "$GITHUB_ENV"
 
       - run: pnpm nx format:check
       - run: pnpm nx sync:check
@@ -61,7 +66,11 @@ jobs:
           cache: pnpm
       - run: pnpm install --frozen-lockfile
       - run: pnpm exec playwright install --with-deps chromium
-      - uses: nrwl/nx-set-shas@v4
+      - id: nx-shas
+        uses: nrwl/nx-set-shas@v4
+      - name: Fallback to current commit on first run
+        if: steps.nx-shas.outputs.noPreviousBuild == 'true'
+        run: echo "NX_BASE=${NX_HEAD}" >> "$GITHUB_ENV"
       - run: pnpm nx affected -t e2e --parallel=1
       - uses: actions/upload-artifact@v4
         if: failure()
